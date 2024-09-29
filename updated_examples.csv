@@ -47,24 +47,18 @@ The guy that the guide that the flight attendant delayed amused calmed down.,Who
 "The guy, who was amused by the guide delayed by the flight attendant, calmed down.",Who did the guide amuse?,s8,first_center_nd,The guy,guy,flight attendant
 "There is that guide delayed by the flight attendant, so the guy, who was amused by the guide, calmed down.",Who did the flight attendant delay?,s8,second_center_sim,The guide,guide,guy
 "There is that guide delayed by the flight attendant, so the guy, who was amused by the guide, calmed down.",Who did the guide amuse?,s8,first_center_sim,The guy,guy,flight attendant
-The dog that the vet that the farmer called treated barked.,Who did the farmer call?,s9,second_center,The vet,vet,dog
-The dog that the vet that the farmer called treated barked.,Who did the vet treat?,s9,first_center,The dog,dog,farmer
-"The dog, who was treated by the vet called by the farmer, barked.",Who did the farmer call?,s9,second_center_nd,The vet,vet,dog
-"The dog, who was treated by the vet called by the farmer, barked.",Who did the vet treat?,s9,first_center_nd,The dog,dog,farmer
-"There is that vet called by the farmer, so the dog, who was treated by the vet, barked.",Who did the farmer call?,s9,second_center_sim,The vet,vet,dog
-"There is that vet called by the farmer, so the dog, who was treated by the vet, barked.",Who did the vet treat?,s9,first_center_sim,The dog,dog,farmer
 The artist that the curator that the museum hired praised smiled.,Who did the museum hire?,s10,second_center,The curator,curator,artist
 The artist that the curator that the museum hired praised smiled.,Who did the curator praise?,s10,first_center,The artist,artist,museum
 "The artist, who was praised by the curator hired by the museum, smiled.",Who did the museum hire?,s10,second_center_nd,The curator,curator,artist
 "The artist, who was praised by the curator hired by the museum, smiled.",Who did the curator praise?,s10,first_center_nd,The artist,artist,museum
 "There is that curator hired by the museum, so the artist, who was praised by the curator, smiled.",Who did the museum hire?,s10,second_center_sim,The curator,curator,artist
 "There is that curator hired by the museum, so the artist, who was praised by the curator, smiled.",Who did the curator praise?,s10,first_center_sim,The artist,artist,museum
-The book that the librarian that the author met recommended sold well.,Who did the author meet?,s11,second_center,The librarian,librarian,book
-The book that the librarian that the author met recommended sold well.,What did the librarian recommend?,s11,first_center,The book,book,author
-"The book, which was recommended by the librarian met by the author, sold well.",Who did the author meet?,s11,second_center_nd,The librarian,librarian,book
-"The book, which was recommended by the librarian met by the author, sold well.",What did the librarian recommend?,s11,first_center_nd,The book,book,author
-"There is that librarian met by the author, so the book, which was recommended by the librarian, sold well.",Who did the author meet?,s11,second_center_sim,The librarian,librarian,book
-"There is that librarian met by the author, so the book, which was recommended by the librarian, sold well.",What did the librarian recommend?,s11,first_center_sim,The book,book,author
+The child that the librarian that the author met liked smiled.,Who did the author meet?,s11,second_center,The librarian,librarian,child
+The child that the librarian that the author met liked smiled.,Who did the librarian like?,s11,first_center,The child,child,author
+"The child, which was liked by the librarian met by the author, smiled.",Who did the author meet?,s11,second_center_nd,The librarian,librarian,child
+"The child, which was liked by the librarian met by the author, smiled.",Who did the librarian like?,s11,first_center_nd,The child,child,author
+"There is that librarian met by the author, so the child, which was liked by the librarian, smiled.",Who did the author meet?,s11,second_center_sim,The librarian,librarian,child
+"There is that librarian met by the author, so the child, which was liked by the librarian, smiled.",Who did the librarian like?,s11,first_center_sim,The child,child,author
 The singer that the manager that the producer hired promoted performed.,Who did the producer hire?,s12,second_center,The manager,manager,singer
 The singer that the manager that the producer hired promoted performed.,Who did the manager promote?,s12,first_center,The singer,singer,producer
 "The singer, who was promoted by the manager hired by the producer, performed.",Who did the producer hire?,s12,second_center_nd,The manager,manager,singer
@@ -83,12 +77,12 @@ The baker that the chef that the manager appointed scolded left.,Who did the che
 "The baker, who was scolded by the chef appointed by the manager, left.",Who did the chef scold?,s14,first_center_nd,The baker,baker,manager
 "There is that chef appointed by the manager, so the baker, who was scolded by the chef, left.",Who did the manager appoint?,s14,second_center_sim,The chef,chef,baker
 "There is that chef appointed by the manager, so the baker, who was scolded by the chef, left.",Who did the chef scold?,s14,first_center_sim,The baker,baker,manager
-The athlete that the coach that the reporter interviewed trained won.,Who did the reporter interview?,s15,second_center,The coach,coach,athlete
-The athlete that the coach that the reporter interviewed trained won.,Who did the coach train?,s15,first_center,The athlete,athlete,reporter
-"The athlete, who was trained by the coach interviewed by the reporter, won.",Who did the reporter interview?,s15,second_center_nd,The coach,coach,athlete
-"The athlete, who was trained by the coach interviewed by the reporter, won.",Who did the coach train?,s15,first_center_nd,The athlete,athlete,reporter
-"There is that coach interviewed by the reporter, so the athlete, who was trained by the coach, won.",Who did the reporter interview?,s15,second_center_sim,The coach,coach,athlete
-"There is that coach interviewed by the reporter, so the athlete, who was trained by the coach, won.",Who did the coach train?,s15,first_center_sim,The athlete,athlete,reporter
+The athlete that the coach that the reporter interviewed loved won.,Who did the reporter interview?,s15,second_center,The coach,coach,athlete
+The athlete that the coach that the reporter interviewed loved won.,Who did the coach love?,s15,first_center,The athlete,athlete,reporter
+"The athlete, who was loved by the coach interviewed by the reporter, won.",Who did the reporter interview?,s15,second_center_nd,The coach,coach,athlete
+"The athlete, who was loved by the coach interviewed by the reporter, won.",Who did the coach love?,s15,first_center_nd,The athlete,athlete,reporter
+"There is that coach interviewed by the reporter, so the athlete, who was loved by the coach, won.",Who did the reporter interview?,s15,second_center_sim,The coach,coach,athlete
+"There is that coach interviewed by the reporter, so the athlete, who was loved by the coach, won.",Who did the coach love?,s15,first_center_sim,The athlete,athlete,reporter
 The programmer that the engineer that the manager promoted collaborated with laughed.,Who did the manager promote?,s16,second_center,The engineer,engineer,programmer
 The programmer that the engineer that the manager promoted collaborated with laughed.,Who did the engineer collaborate with?,s16,first_center,The programmer,programmer,manager
 "The programmer, who collaborated with the engineer promoted by the manager, laughed.",Who did the manager promote?,s16,second_center_nd,The engineer,engineer,programmer
@@ -107,24 +101,24 @@ The nurse that the doctor that the patient praised helped smiled.,Who did the do
 "The nurse, who was helped by the doctor praised by the patient, smiled.",Who did the doctor help?,s18,first_center_nd,The nurse,nurse,patient
 "There is that doctor praised by the patient, so the nurse, who was helped by the doctor, smiled.",Who did the patient praise?,s18,second_center_sim,The doctor,doctor,nurse
 "There is that doctor praised by the patient, so the nurse, who was helped by the doctor, smiled.",Who did the doctor help?,s18,first_center_sim,The nurse,nurse,patient
-The customer that the waiter that the chef liked served tipped.,Who did the chef like?,s19,second_center,The waiter,waiter,customer
-The customer that the waiter that the chef liked served tipped.,Who did the waiter serve?,s19,first_center,The customer,customer,chef
-"The customer, who was served by the waiter liked by the chef, cooked.",Who did the chef like?,s19,second_center_nd,The waiter,waiter,customer
-"The customer, who was served by the waiter liked by the chef, cooked.",Who did the waiter serve?,s19,first_center_nd,The customer,customer,chef
-"There is that waiter liked by the chef, so the customer, who was served by the waiter, cooked.",Who did the chef like?,s19,second_center_sim,The waiter,waiter,customer
-"There is that waiter liked by the chef, so the customer, who was served by the waiter, cooked.",Who did the waiter serve?,s19,first_center_sim,The customer,customer,chef
+The customer that the waiter that the woman liked served tipped.,Who did the woman like?,s19,second_center,The waiter,waiter,customer
+The customer that the waiter that the woman liked served tipped.,Who did the waiter serve?,s19,first_center,The customer,customer,woman
+"The customer, who was served by the waiter liked by the woman, tipped.",Who did the woman like?,s19,second_center_nd,The waiter,waiter,customer
+"The customer, who was served by the waiter liked by the woman, tipped.",Who did the waiter serve?,s19,first_center_nd,The customer,customer,woman
+"There is that waiter liked by the woman, so the customer, who was served by the waiter, tipped.",Who did the woman like?,s19,second_center_sim,The waiter,waiter,customer
+"There is that waiter liked by the woman, so the customer, who was served by the waiter, tipped.",Who did the waiter serve?,s19,first_center_sim,The customer,customer,woman
 The pilot that the passenger that the flight attendant assisted admired flew.,Who did the flight attendant assist?,s20,second_center,The passenger,passenger,pilot
 The pilot that the passenger that the flight attendant assisted admired flew.,Who did the passenger admire?,s20,first_center,The pilot,pilot,flight attendant
 "The pilot, who was admired by the passenger assisted by the flight attendant, flew.",Who did the flight attendant assist?,s20,second_center_nd,The passenger,passenger,pilot
 "The pilot, who was admired by the passenger assisted by the flight attendant, flew.",Who did the passenger admire?,s20,first_center_nd,The pilot,pilot,flight attendant
 "There is that passenger assisted by the flight attendant, so the pilot, who was admired by the passenger, flew.",Who did the flight attendant assist?,s20,second_center_sim,The passenger,passenger,pilot
 "There is that passenger assisted by the flight attendant, so the pilot, who was admired by the passenger, flew.",Who did the passenger admire?,s20,first_center_sim,The pilot,pilot,flight attendant
-The lawyer that the detective that the suspect trusted consulted objected.,Who did the suspect trust?,s21,second_center,The detective,detective,lawyer
-The lawyer that the detective that the suspect trusted consulted objected.,Who did the detective consult?,s21,first_center,The lawyer,lawyer,suspect
-"The lawyer, who was consulted by the detective trusted by the suspect, objected.",Who did the suspect trust?,s21,second_center_nd,The detective,detective,lawyer
-"The lawyer, who was consulted by the detective trusted by the suspect, objected.",Who did the detective consult?,s21,first_center_nd,The lawyer,lawyer,suspect
-"There is that detective trusted by the suspect, so the lawyer, who was consulted by the detective, objected.",Who did the suspect trust?,s21,second_center_sim,The detective,detective,lawyer
-"There is that detective trusted by the suspect, so the lawyer, who was consulted by the detective, objected.",Who did the detective consult?,s21,first_center_sim,The lawyer,lawyer,suspect
+The lawyer that the detective that the judge trusted consulted objected.,Who did the judge trust?,s21,second_center,The detective,detective,lawyer
+The lawyer that the detective that the judge trusted consulted objected.,Who did the detective consult?,s21,first_center,The lawyer,lawyer,judge
+"The lawyer, who was consulted by the detective trusted by the judge, objected.",Who did the judge trust?,s21,second_center_nd,The detective,detective,lawyer
+"The lawyer, who was consulted by the detective trusted by the judge, objected.",Who did the detective consult?,s21,first_center_nd,The lawyer,lawyer,judge
+"There is that detective trusted by the judge, so the lawyer, who was consulted by the detective, objected.",Who did the judge trust?,s21,second_center_sim,The detective,detective,lawyer
+"There is that detective trusted by the judge, so the lawyer, who was consulted by the detective, objected.",Who did the detective consult?,s21,first_center_sim,The lawyer,lawyer,judge
 The manager that the supervisor that the employee disliked fired left.,Who did the employee dislike?,s22,second_center,The supervisor,supervisor,manager
 The manager that the supervisor that the employee disliked fired left.,Who did the supervisor fire?,s22,first_center,The manager,manager,employee
 "The manager, who was fired by the supervisor disliked by the employee, left.",Who did the employee dislike?,s22,second_center_nd,The supervisor,supervisor,manager
@@ -137,30 +131,30 @@ The director that the actor that the audience admired criticized frowned.,Who di
 "The director, who was criticized by the actor admired by the audience, frowned.",Who did the actor criticize?,s23,first_center_nd,The director,director,audience
 "There is that actor admired by the audience, so the director, who was criticized by the actor, frowned.",Who did the audience admire?,s23,second_center_sim,The actor,actor,director
 "There is that actor admired by the audience, so the director, who was criticized by the actor, frowned.",Who did the actor criticize?,s23,first_center_sim,The director,director,audience
-The musician that the conductor that the audience cheered directed performed.,Who did the audience cheer?,s24,second_center,The conductor,conductor,musician
-The musician that the conductor that the audience cheered directed performed.,Who did the conductor direct?,s24,first_center,The musician,musician,audience
-"The musician, who was directed by the conductor cheered by the audience, performed.",Who did the audience cheer?,s24,second_center_nd,The conductor,conductor,musician
-"The musician, who was directed by the conductor cheered by the audience, performed.",Who did the conductor direct?,s24,first_center_nd,The musician,musician,audience
-"There is that conductor cheered by the audience, so the musician, who was directed by the conductor, performed.",Who did the audience cheer?,s24,second_center_sim,The conductor,conductor,musician
-"There is that conductor cheered by the audience, so the musician, who was directed by the conductor, performed.",Who did the conductor direct?,s24,first_center_sim,The musician,musician,audience
-The carpenter that the builder that the homeowner trusted hired resigned.,Who did the homeowner trust?,s25,second_center,The builder,builder,carpenter
-The carpenter that the builder that the homeowner trusted hired resigned.,Who did the builder hire?,s25,first_center,The carpenter,carpenter,homeowner
-"The carpenter, who was hired by the builder trusted by the homeowner, resigned.",Who did the homeowner trust?,s25,second_center_nd,The builder,builder,carpenter
-"The carpenter, who was hired by the builder trusted by the homeowner, resigned.",Who did the builder hire?,s25,first_center_nd,The carpenter,carpenter,homeowner
-"There is that builder trusted by the homeowner, so the carpenter, who was hired by the builder, resigned.",Who did the homeowner trust?,s25,second_center_sim,The builder,builder,carpenter
-"There is that builder trusted by the homeowner, so the carpenter, who was hired by the builder, resigned.",Who did the builder hire?,s25,first_center_sim,The carpenter,carpenter,homeowner
+The musician that the conductor that the audience cheered liked performed.,Who did the audience cheer?,s24,second_center,The conductor,conductor,musician
+The musician that the conductor that the audience cheered liked performed.,Who did the conductor like?,s24,first_center,The musician,musician,audience
+"The musician, who was liked by the conductor cheered by the audience, performed.",Who did the audience cheer?,s24,second_center_nd,The conductor,conductor,musician
+"The musician, who was liked by the conductor cheered by the audience, performed.",Who did the conductor like?,s24,first_center_nd,The musician,musician,audience
+"There is that conductor cheered by the audience, so the musician, who was liked by the conductor, performed.",Who did the audience cheer?,s24,second_center_sim,The conductor,conductor,musician
+"There is that conductor cheered by the audience, so the musician, who was liked by the conductor, performed.",Who did the conductor like?,s24,first_center_sim,The musician,musician,audience
+The carpenter that the builder that the homeowner trusted hated resigned.,Who did the homeowner trust?,s25,second_center,The builder,builder,carpenter
+The carpenter that the builder that the homeowner trusted hated resigned.,Who did the builder hate?,s25,first_center,The carpenter,carpenter,homeowner
+"The carpenter, who was hated by the builder trusted by the homeowner, resigned.",Who did the homeowner trust?,s25,second_center_nd,The builder,builder,carpenter
+"The carpenter, who was hated by the builder trusted by the homeowner, resigned.",Who did the builder hate?,s25,first_center_nd,The carpenter,carpenter,homeowner
+"There is that builder trusted by the homeowner, so the carpenter, who was hated by the builder, resigned.",Who did the homeowner trust?,s25,second_center_sim,The builder,builder,carpenter
+"There is that builder trusted by the homeowner, so the carpenter, who was hated by the builder, resigned.",Who did the builder hate?,s25,first_center_sim,The carpenter,carpenter,homeowner
 The editor that the journalist that the reader respected criticized apologized.,Who did the reader respect?,s26,second_center,The journalist,journalist,editor
 The editor that the journalist that the reader respected criticized apologized.,Who did the journalist criticize?,s26,first_center,The editor,editor,reader
 "The editor, who was criticized by the journalist respected by the reader, apologized.",Who did the reader respect?,s26,second_center_nd,The journalist,journalist,editor
 "The editor, who was criticized by the journalist respected by the reader, apologized.",Who did the journalist criticize?,s26,first_center_nd,The editor,editor,reader
 "There is that journalist respected by the reader, so the editor, who was criticized by the journalist, apologized.",Who did the reader respect?,s26,second_center_sim,The journalist,journalist,editor
 "There is that journalist respected by the reader, so the editor, who was criticized by the journalist, apologized.",Who did the journalist criticize?,s26,first_center_sim,The editor,editor,reader
-The athlete that the coach that the reporter praised trained won.,Who did the reporter praise?,s27,second_center,The coach,coach,athlete
-The athlete that the coach that the reporter praised trained won.,Who did the coach train?,s27,first_center,The athlete,athlete,reporter
-"The athlete, who was trained by the coach praised by the reporter, won.",Who did the reporter praise?,s27,second_center_nd,The coach,coach,athlete
-"The athlete, who was trained by the coach praised by the reporter, won.",Who did the coach train?,s27,first_center_nd,The athlete,athlete,reporter
-"There is that coach praised by the reporter, so the athlete, who was trained by the coach, won.",Who did the reporter praise?,s27,second_center_sim,The coach,coach,athlete
-"There is that coach praised by the reporter, so the athlete, who was trained by the coach, won.",Who did the coach train?,s27,first_center_sim,The athlete,athlete,reporter
+The athlete that the coach that the reporter praised hated won.,Who did the reporter praise?,s27,second_center,The coach,coach,athlete
+The athlete that the coach that the reporter praised hated won.,Who did the coach hate?,s27,first_center,The athlete,athlete,reporter
+"The athlete, who was hated by the coach praised by the reporter, won.",Who did the reporter praise?,s27,second_center_nd,The coach,coach,athlete
+"The athlete, who was hated by the coach praised by the reporter, won.",Who did the coach hate?,s27,first_center_nd,The athlete,athlete,reporter
+"There is that coach praised by the reporter, so the athlete, who was hated by the coach, won.",Who did the reporter praise?,s27,second_center_sim,The coach,coach,athlete
+"There is that coach praised by the reporter, so the athlete, who was hated by the coach, won.",Who did the coach hate?,s27,first_center_sim,The athlete,athlete,reporter
 The scientist that the professor that the student admired collaborated with won a prize.,Who did the student admire?,s28,second_center,The professor,professor,scientist
 The scientist that the professor that the student admired collaborated with won a prize.,Who did the professor collaborate with?,s28,first_center,The scientist,scientist,student
 "The scientist, who collaborated with the professor admired by the student, won a prize.",Who did the student admire?,s28,second_center_nd,The professor,professor,scientist
@@ -173,54 +167,54 @@ The player that the coach that the fan adored shouted at scored a goal.,Who did 
 "The player, who was shouted by the coach adored by the fan, scored a goal.",Who did the coach shout at?,s29,first_center_nd,The player,player,fan
 "There is that coach adored by the fan, so the player, who was shouted at by the coach, scored a goal.",Who did the fan adore?,s29,second_center_sim,The coach,coach,player
 "There is that coach adored by the fan, so the player, who was shouted at by the coach, scored a goal.",Who did the coach shout at?,s29,first_center_sim,The player,player,fan
-The actor that the director that the critic loved cast performed in a movie.,Who did the critic love?,s30,second_center,The director,director,actor
-The actor that the director that the critic loved cast performed in a movie.,Who did the director cast?,s30,first_center,The actor,actor,critic
-"The actor, who was cast by the director loved by the critic, performed in a movie.",Who did the critic love?,s30,second_center_nd,The director,director,actor
-"The actor, who was cast by the director loved by the critic, performed in a movie.",Who did the director cast?,s30,first_center_nd,The actor,actor,critic
-"There is that director loved by the critic, so the actor, who was cast by the director, performed in a movie.",Who did the critic love?,s30,second_center_sim,The director,director,actor
-"There is that director loved by the critic, so the actor, who was cast by the director, performed in a movie.",Who did the director cast?,s30,first_center_sim,The actor,actor,critic
-The engineer that the architect that the client hired recommended designed the building.,Who did the client hire?,s31,second_center,The architect,architect,engineer
-The engineer that the architect that the client hired recommended designed the building.,Who did the architect recommend?,s31,first_center,The engineer,engineer,client
-"The engineer, who was recommended by the architect hired by the client, designed the building.",Who did the client hire?,s31,second_center_nd,The architect,architect,engineer
-"The engineer, who was recommended by the architect hired by the client, designed the building.",Who did the architect recommend?,s31,first_center_nd,The engineer,engineer,client
-"There is that architect hired by the client, so the engineer, who was recommended by the architect, designed the building.",Who did the client hire?,s31,second_center_sim,The architect,architect,engineer
-"There is that architect hired by the client, so the engineer, who was recommended by the architect, designed the building.",Who did the architect recommend?,s31,first_center_sim,The engineer,engineer,client
+The actor that the director that the dancer loved cast performed in a movie.,Who did the dancer love?,s30,second_center,The director,director,actor
+The actor that the director that the dancer loved cast performed in a movie.,Who did the director cast?,s30,first_center,The actor,actor,dancer
+"The actor, who was cast by the director loved by the dancer, performed in a movie.",Who did the dancer love?,s30,second_center_nd,The director,director,actor
+"The actor, who was cast by the director loved by the dancer, performed in a movie.",Who did the director cast?,s30,first_center_nd,The actor,actor,dancer
+"There is that director loved by the dancer, so the actor, who was cast by the director, performed in a movie.",Who did the dancer love?,s30,second_center_sim,The director,director,actor
+"There is that director loved by the dancer, so the actor, who was cast by the director, performed in a movie.",Who did the director cast?,s30,first_center_sim,The actor,actor,dancer
+The engineer that the architect that the client hired hated designed the building.,Who did the client hire?,s31,second_center,The architect,architect,engineer
+The engineer that the architect that the client hired hated designed the building.,Who did the architect hate?,s31,first_center,The engineer,engineer,client
+"The engineer, who was hated by the architect hired by the client, designed the building.",Who did the client hire?,s31,second_center_nd,The architect,architect,engineer
+"The engineer, who was hated by the architect hired by the client, designed the building.",Who did the architect hate?,s31,first_center_nd,The engineer,engineer,client
+"There is that architect hired by the client, so the engineer, who was hated by the architect, designed the building.",Who did the client hire?,s31,second_center_sim,The architect,architect,engineer
+"There is that architect hired by the client, so the engineer, who was hated by the architect, designed the building.",Who did the architect hate?,s31,first_center_sim,The engineer,engineer,client
 The judge that the lawyer that the defendant trusted consulted agreed.,Who did the defendant trust?,s32,second_center,The lawyer,lawyer,judge
 The judge that the lawyer that the defendant trusted consulted agreed.,Who did the lawyer consult?,s32,first_center,The judge,judge,defendant
 "The judge, who was consulted by the lawyer trusted by the defendant, agreed.",Who did the defendant trust?,s32,second_center_nd,The lawyer,lawyer,judge
 "The judge, who was consulted by the lawyer trusted by the defendant, agreed.",Who did the lawyer consult?,s32,first_center_nd,The judge,judge,defendant
 "There is that lawyer trusted by the defendant, so the judge, who was consulted by the lawyer, agreed.",Who did the defendant trust?,s32,second_center_sim,The lawyer,lawyer,judge
 "There is that lawyer trusted by the defendant, so the judge, who was consulted by the lawyer, agreed.",Who did the lawyer consult?,s32,first_center_sim,The judge,judge,defendant
-The dancer that the choreographer that the audience applauded trained performed.,Who did the audience applaud?,s33,second_center,The choreographer,choreographer,dancer
-The dancer that the choreographer that the audience applauded trained performed.,Who did the choreographer train?,s33,first_center,The dancer,dancer,audience
-"The dancer, who was trained by the choreographer applauded by the audience, performed.",Who did the audience applaud?,s33,second_center_nd,The choreographer,choreographer,dancer
-"The dancer, who was trained by the choreographer applauded by the audience, performed.",Who did the choreographer train?,s33,first_center_nd,The dancer,dancer,audience
-"There is that choreographer applauded by the audience, so the dancer, who was trained by the choreographer, performed.",Who did the audience applaud?,s33,second_center_sim,The choreographer,choreographer,dancer
-"There is that choreographer applauded by the audience, so the dancer, who was trained by the choreographer, performed.",Who did the choreographer train?,s33,first_center_sim,The dancer,dancer,audience
+The dancer that the choreographer that the audience applauded loved performed.,Who did the audience applaud?,s33,second_center,The choreographer,choreographer,dancer
+The dancer that the choreographer that the audience applauded loved performed.,Who did the choreographer love?,s33,first_center,The dancer,dancer,audience
+"The dancer, who was loved by the choreographer applauded by the audience, performed.",Who did the audience applaud?,s33,second_center_nd,The choreographer,choreographer,dancer
+"The dancer, who was loved by the choreographer applauded by the audience, performed.",Who did the choreographer love?,s33,first_center_nd,The dancer,dancer,audience
+"There is that choreographer applauded by the audience, so the dancer, who was loved by the choreographer, performed.",Who did the audience applaud?,s33,second_center_sim,The choreographer,choreographer,dancer
+"There is that choreographer applauded by the audience, so the dancer, who was loved by the choreographer, performed.",Who did the choreographer love?,s33,first_center_sim,The dancer,dancer,audience
 The reporter that the editor that the journalist praised interviewed resigned.,Who did the journalist praise?,s34,second_center,The editor,editor,reporter
 The reporter that the editor that the journalist praised interviewed resigned.,Who did the editor interview?,s34,first_center,The reporter,reporter,journalist
 "The reporter, who was interviewed by the editor praised by the journalist, resigned.",Who did the journalist praise?,s34,second_center_nd,The editor,editor,reporter
 "The reporter, who was interviewed by the editor praised by the journalist, resigned.",Who did the editor interview?,s34,first_center_nd,The reporter,reporter,journalist
 "There is that editor praised by the journalist, so the reporter, who was interviewed by the editor, resigned.",Who did the journalist praise?,s34,second_center_sim,The editor,editor,reporter
 "There is that editor praised by the journalist, so the reporter, who was interviewed by the editor, resigned.",Who did the editor interview?,s34,first_center_sim,The reporter,reporter,journalist
-The student that the professor that the dean recommended taught graduated.,Who did the dean recommend?,s35,second_center,The professor,professor,student
-The student that the professor that the dean recommended taught graduated.,Who did the professor teach?,s35,first_center,The student,student,dean
-"The student, who was taught by the professor recommended by the dean, graduated.",Who did the dean recommend?,s35,second_center_nd,The professor,professor,student
-"The student, who was taught by the professor recommended by the dean, graduated.",Who did the professor teach?,s35,first_center_nd,The student,student,dean
-"There is that professor recommended by the dean, so the student, who was taught by the professor, graduated.",Who did the dean recommend?,s35,second_center_sim,The professor,professor,student
-"There is that professor recommended by the dean, so the student, who was taught by the professor, graduated.",Who did the professor teach?,s35,first_center_sim,The student,student,dean
+The student that the professor that the dean recommended scared graduated.,Who did the dean recommend?,s35,second_center,The professor,professor,student
+The student that the professor that the dean recommended scared graduated.,Who did the professor scare?,s35,first_center,The student,student,dean
+"The student, who was scared by the professor recommended by the dean, graduated.",Who did the dean recommend?,s35,second_center_nd,The professor,professor,student
+"The student, who was scared by the professor recommended by the dean, graduated.",Who did the professor scare?,s35,first_center_nd,The student,student,dean
+"There is that professor recommended by the dean, so the student, who was scared by the professor, graduated.",Who did the dean recommend?,s35,second_center_sim,The professor,professor,student
+"There is that professor recommended by the dean, so the student, who was scared by the professor, graduated.",Who did the professor scare?,s35,first_center_sim,The student,student,dean
 The gardener that the neighbor that the child loved helped planted flowers.,Who did the child love?,s36,second_center,The neighbor,neighbor,gardener
 The gardener that the neighbor that the child loved helped planted flowers.,Who did the neighbor help?,s36,first_center,The gardener,gardener,child
 "The gardener, who was helped by the neighbor loved by the child, planted flowers.",Who did the child love?,s36,second_center_nd,The neighbor,neighbor,gardener
 "The gardener, who was helped by the neighbor loved by the child, planted flowers.",Who did the neighbor help?,s36,first_center_nd,The gardener,gardener,child
 "There is that neighbor loved by the child, so the gardener, who was helped by the neighbor, planted flowers.",Who did the child love?,s36,second_center_sim,The neighbor,neighbor,gardener
 "There is that neighbor loved by the child, so the gardener, who was helped by the neighbor, planted flowers.",Who did the neighbor help?,s36,first_center_sim,The gardener,gardener,child
-The baker that the chef that the customer thanked recommended baked bread.,Who did the customer thank?,s37,second_center,The chef,baker,chef
-The baker that the customer that the chef recommended thanked baked bread.,Who did the chef recommend?,s37,first_center,The baker,baker,customer
-"The baker, who was recommended by the chef thanked by the customer, baked bread.",Who did the customer thank?,s37,second_center_nd,The chef,baker,chef
-"The baker, who was recommended by the chef thanked by the customer, baked bread.",Who did the chef recommend?,s37,first_center_nd,The baker,baker,customer
-"There is that chef thanked by the customer, so the baker, who was recommended by the chef, baked bread.",Who did the customer thank?,s37,second_center_sim,The chef,baker,chef
-"There is that chef thanked by the customer, so the baker, who was recommended by the chef, baked bread.",Who did the chef recommend?,s37,first_center_sim,The baker,baker,customer
+The baker that the chef that the confectioner thanked recommended baked bread.,Who did the confectioner thank?,s37,second_center,The chef,baker,chef
+The baker that the confectioner that the chef recommended thanked baked bread.,Who did the chef recommend?,s37,first_center,The baker,baker,confectioner
+"The baker, who was recommended by the chef thanked by the confectioner, baked bread.",Who did the confectioner thank?,s37,second_center_nd,The chef,baker,chef
+"The baker, who was recommended by the chef thanked by the confectioner, baked bread.",Who did the chef recommend?,s37,first_center_nd,The baker,baker,confectioner
+"There is that chef thanked by the confectioner, so the baker, who was recommended by the chef, baked bread.",Who did the confectioner thank?,s37,second_center_sim,The chef,baker,chef
+"There is that chef thanked by the confectioner, so the baker, who was recommended by the chef, baked bread.",Who did the chef recommend?,s37,first_center_sim,The baker,baker,confectioner
 The firefighter that the mayor that the citizen admired awarded saved a family.,Who did the citizen admire?,s38,second_center,The mayor,mayor,firefighter
 The firefighter that the mayor that the citizen admired awarded saved a family.,Who did the mayor award?,s38,first_center,The firefighter,firefighter,citizen
 "The firefighter, who was awarded by the mayor admired by the citizen, saved a family.",Who did the citizen admire?,s38,second_center_nd,The mayor,mayor,firefighter
@@ -233,12 +227,6 @@ The artist that the collector that the gallery owner invited greeted painted a m
 "The artist, who was greeted by the collector invited by the gallery owner, painted a mural.",Who did the collector greet?,s39,first_center_nd,The artist,artist,owner
 "There is that collector invited by the gallery owner, so the artist, who was greeted by the collector, painted a mural.",Who did the gallery owner invite?,s39,second_center_sim,The collector,collector,artist
 "There is that collector invited by the gallery owner, so the artist, who was greeted by the collector, painted a mural.",Who did the collector greet?,s39,first_center_sim,The artist,artist,owner
-The cow that the veterinarian that the rancher recommended treated recovered.,Who did the rancher recommend?,s40,second_center,The veterinarian,veterinarian,cow
-The cow that the veterinarian that the rancher recommended treated recovered.,Who did the veterinarian treat?,s40,first_center,The cow,cow,rancher
-"The cow, who was treated by the veterinarian recommended by the rancher, recovered.",Who did the rancher recommend?,s40,second_center_nd,The veterinarian,veterinarian,cow
-"The cow, who was treated by the veterinarian recommended by the rancher, recovered.",Who did the veterinarian treat?,s40,first_center_nd,The cow,cow,rancher
-"There is that veterinarian recommended by the rancher, so the cow, who was treated by the veterinarian, recovered.",Who did the rancher recommend?,s40,second_center_sim,The veterinarian,veterinarian,cow
-"There is that veterinarian recommended by the rancher, so the cow, who was treated by the veterinarian, recovered.",Who did the veterinarian treat?,s40,first_center_sim,The cow,cow,rancher
 The child that the lifeguard that the swimmers liked saved smiled.,Who did the swimmers like?,s41,second_center,The lifeguard,lifeguard,child
 The child that the lifeguard that the swimmers liked saved smiled.,Who did the lifeguard save?,s41,first_center,The child,child,swimmers
 "The child, who was saved by the lifeguard liked by the swimmers, smiled.",Who did the swimmers like?,s41,second_center_nd,The lifeguard,lifeguard,child
@@ -257,12 +245,12 @@ The librarian that the student that the teacher complimented assisted found a bo
 "The librarian, who was assisted by the student complimented by the teacher, found a book.",Who did the student assist?,s43,first_center_nd,The librarian,librarian,teacher
 "There is that student complimented by the teacher, so the librarian, who was assisted by the student, found a book.",Who did the teacher compliment?,s43,second_center_sim,The student,student,librarian
 "There is that student complimented by the teacher, so the librarian, who was assisted by the student, found a book.",Who did the student assist?,s43,first_center_sim,The librarian,librarian,teacher
-The plumber that the contractor that the homeowner hired recommended fixed the leak.,Who did the homeowner hire?,s44,second_center,The contractor,contractor,plumber
-The plumber that the contractor that the homeowner hired recommended fixed the leak.,Who did the contractor recommend?,s44,first_center,The plumber,plumber,homeowner
-"The plumber, who was recommended by the contractor hired by the homeowner, fixed the leak.",Who did the homeowner hire?,s44,second_center_nd,The contractor,contractor,plumber
-"The plumber, who was recommended by the contractor hired by the homeowner, fixed the leak.",Who did the contractor recommend?,s44,first_center_nd,The plumber,plumber,homeowner
-"There is that contractor hired by the homeowner, so the plumber, who was recommended by the contractor, fixed the leak.",Who did the homeowner hire?,s44,second_center_sim,The contractor,contractor,plumber
-"There is that contractor hired by the homeowner, so the plumber, who was recommended by the contractor, fixed the leak.",Who did the contractor recommend?,s44,first_center_sim,The plumber,plumber,homeowner
+The plumber that the contractor that the homeowner hired respected fixed the leak.,Who did the homeowner hire?,s44,second_center,The contractor,contractor,plumber
+The plumber that the contractor that the homeowner hired respected fixed the leak.,Who did the contractor respect?,s44,first_center,The plumber,plumber,homeowner
+"The plumber, who was respected by the contractor hired by the homeowner, fixed the leak.",Who did the homeowner hire?,s44,second_center_nd,The contractor,contractor,plumber
+"The plumber, who was respected by the contractor hired by the homeowner, fixed the leak.",Who did the contractor respect?,s44,first_center_nd,The plumber,plumber,homeowner
+"There is that contractor hired by the homeowner, so the plumber, who was respected by the contractor, fixed the leak.",Who did the homeowner hire?,s44,second_center_sim,The contractor,contractor,plumber
+"There is that contractor hired by the homeowner, so the plumber, who was respected by the contractor, fixed the leak.",Who did the contractor respect?,s44,first_center_sim,The plumber,plumber,homeowner
 The tailor that the client that the designer complimented commissioned sewed a suit.,Who did the designer compliment?,s45,second_center,The client,client,tailor
 The tailor that the client that the designer complimented commissioned sewed a suit.,Who did the client commission?,s45,first_center,The tailor,tailor,designer
 "The tailor, who was commissioned by the client complimented by the designer, sewed a suit.",Who did the designer compliment?,s45,second_center_nd,The client,client,tailor
@@ -275,24 +263,18 @@ The electrician that the supervisor that the foreman trained supervised installe
 "The electrician, who was supervised by the supervisor trained by the foreman, installed the wiring.",Who did the supervisor supervise?,s46,first_center_nd,The electrician,electrician,foreman
 "There is that supervisor trained by the foreman, so the electrician, who was supervised by the supervisor, installed the wiring.",Who did the foreman train?,s46,second_center_sim,The supervisor,supervisor,electrician
 "There is that supervisor trained by the foreman, so the electrician, who was supervised by the supervisor, installed the wiring.",Who did the supervisor supervise?,s46,first_center_sim,The electrician,electrician,foreman
-The driver that the instructor that the transportation company employed trained passed the test.,Who did the transportation company employ?,s47,second_center,The instructor,instructor,driver
-The driver that the instructor that the transportation company employed trained passed the test.,Who did the instructor train?,s47,first_center,The driver,driver,company
-"The driver, who passed the test trained by the instructor employed by the transportation company, passed the test.",Who did the transportation company employ?,s47,second_center_nd,The instructor,instructor,driver
-"The driver, who passed the test trained by the instructor employed by the transportation company, passed the test.",Who did the instructor train?,s47,first_center_nd,The driver,driver,company
-"There is that instructor employed by the transportation company, so the driver, who passed the test trained by the instructor, passed the test.",Who did the transportation company employ?,s47,second_center_sim,The instructor,instructor,driver
-"There is that instructor employed by the transportation company, so the driver, who passed the test trained by the instructor, passed the test.",Who did the instructor train?,s47,first_center_sim,The driver,driver,company
+The driver that the instructor that the transportation company manager employed trained passed the test.,Who did the transportation company employ?,s47,second_center,The instructor,instructor,driver
+The driver that the instructor that the transportation company manager employed trained passed the test.,Who did the instructor train?,s47,first_center,The driver,driver,company manager
+"The driver, who passed the test trained by the instructor employed by the transportation company manager, passed the test.",Who did the transportation company employ?,s47,second_center_nd,The instructor,instructor,driver
+"The driver, who passed the test trained by the instructor employed by the transportation company manager, passed the test.",Who did the instructor train?,s47,first_center_nd,The driver,driver,company manager
+"There is that instructor employed by the transportation company manager, so the driver, who passed the test trained by the instructor, passed the test.",Who did the transportation company employ?,s47,second_center_sim,The instructor,instructor,driver
+"There is that instructor employed by the transportation company manager, so the driver, who passed the test trained by the instructor, passed the test.",Who did the instructor train?,s47,first_center_sim,The driver,driver,company manager
 The architect that the builder that the developer funded hired designed the skyscraper.,Who did the developer fund?,s48,second_center,The builder,builder,architect
 The architect that the builder that the developer funded hired designed the skyscraper.,Who did the builder hire?,s48,first_center,The architect,architect,developer
 "The architect, who was hired by the builder funded by the developer, designed the skyscraper.",Who did the developer fund?,s48,second_center_nd,The builder,builder,architect
 "The architect, who was hired by the builder funded by the developer, designed the skyscraper.",Who did the builder hire?,s48,first_center_nd,The architect,architect,developer
 "There is that builder funded by the developer, so the architect, who was hired by the builder, designed the skyscraper.",Who did the developer fund?,s48,second_center_sim,The builder,builder,architect
 "There is that builder funded by the developer, so the architect, who was hired by the builder, designed the skyscraper.",Who did the builder hire?,s48,first_center_sim,The architect,architect,developer
-The driver that the mechanic that the race official approved repaired the car for won the race.,Who did the race official approve?,s49,second_center,The mechanic,mechanic,driver
-The driver that the mechanic that the race official approved repaired the car for won the race.,Who did the mechanic repair the car for?,s49,first_center,The driver,driver,official
-"The driver, whose car was repaired by the mechanic approved by the race official, won the race.",Who did the race official approve?,s49,second_center_nd,The mechanic,mechanic,driver
-"The driver, whose car was repaired by the mechanic approved by the race official, won the race.",Who did the mechanic repair the car for?,s49,first_center_nd,The driver,driver,official
-"There is that mechanic approved by the race official, so the driver, whose car was repaired by the mechanic, won the race.",Who did the race official approve?,s49,second_center_sim,The mechanic,mechanic,driver
-"There is that mechanic approved by the race official, so the driver, whose car was repaired by the mechanic, won the race.",Who did the mechanic repair the car for?,s49,first_center_sim,The driver,driver,official
 The professor that the researcher that the academic committee honored advised published a paper.,Who did the academic committee honor?,s50,second_center,The researcher,researcher,professor
 The professor that the researcher that the academic committee honored advised published a paper.,Who did the researcher advise?,s50,first_center,The professor,professor,committee
 "The professor, who was advised by the researcher honored by the academic committee, published a paper.",Who did the academic committee honor?,s50,second_center_nd,The researcher,researcher,professor

@@ -13,5 +13,5 @@
 #SBATCH --cpus-per-task=4 # CPU cores per process
 #SBATCH --gpus=1 # GPUs in total
 
-python eval_on_dataset.py -m "lmsys/vicuna-7b-v1.3" -d "examples.csv"
+python eval_on_dataset.py -m "lmsys/vicuna-7b-v1.3" -d "updated_examples.csv"
 

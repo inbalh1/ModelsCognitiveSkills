@@ -33,26 +33,37 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
     input_ids_sentence = tokenizer(prompt, return_tensors="pt").input_ids.to(DEVICE)
     correct_tokens = tokenizer(correct_option, return_tensors="pt").input_ids.squeeze()
     incorrect_tokens = tokenizer(incorrect_option, return_tensors="pt").input_ids.squeeze()
-    
+
     # Get the possible token IDs (correct and incorrect tokens)
     correct_token_ids = correct_tokens.tolist()
     incorrect_token_ids = incorrect_tokens.tolist()
-    
+
     # Initialize the predicted tokens list with the sentence input
     generated_ids = input_ids_sentence
     answer_ids = tokenizer.encode("The")
 
     # here we are generting sequence in num_tokens length, to handle multiple tokens answers
     # in the accuracy calculation we will ceck only the first token of the answer
-    for _ in range(num_tokens):
+    for it in range(num_tokens):
         with torch.no_grad():
-            outputs = model(generated_ids).logits
-        
-        next_token_logits = outputs[:, -1, :]
+            outputs = model(generated_ids)
+            logits = outputs.logits
+
+        next_token_logits = logits[:, -1, :]
 
         # Extract logits only for the tokens in correct and incorrect options
-        valid_token_ids = correct_token_ids + incorrect_token_ids
-        next_token_logits_valid = next_token_logits[:, valid_token_ids]
+        correct_first_token = correct_token_ids[1]
+        incorrect_first_token = incorrect_token_ids[1]
+
+        # calc probability only on the first inference pass
+        if it == 0:
+          valid_token_ids = list(set(correct_token_ids + incorrect_token_ids))
+          valid_token_ids.remove(1) # remove start token
+          next_token_logits_valid = next_token_logits[:, valid_token_ids]
+
+          probabilities = torch.softmax(next_token_logits_valid, dim=-1)
+          probabilities_list = probabilities.squeeze().tolist()
+          token_probabilities = {token_id: prob for token_id, prob in zip(valid_token_ids, probabilities_list)}
 
         # Find the argmax of the valid token logits
         predicted_token_id = valid_token_ids[torch.argmax(next_token_logits_valid)]
@@ -62,12 +73,14 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
         generated_ids = torch.cat((generated_ids, predicted_token_id_tensor), dim=-1)
 
     predicted_text = tokenizer.decode(answer_ids, skip_special_tokens=True)
-    return predicted_text
+    return predicted_text, token_probabilities, correct_first_token, incorrect_first_token
 
-
-def predict_and_calculate_correct_predictions(model, tokenizer, data_df, print=False):
+def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
+                                              output_path='output.csv', print=False):
     correct_predictions = 0
     total_predictions = 0
+
+    output = []
 
     for index, row in data_df.iterrows():
         sentence = row['sentence']
@@ -76,7 +89,8 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df, print=F
         true_answer = row['answer']
         question = row['question']
 
-        predicted_answer = predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question)
+        predicted_answer, token_probabilities, correct_token, incorrect_token = \
+          predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question)
         if print:
           print(f"Sentence: {sentence}")
           print(f"Correct Option: {correct_option}")
@@ -96,6 +110,22 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df, print=F
           print("-" * 50)
 
         total_predictions += 1
+
+
+        output.append({
+            'set_id': row['set_id'],  # Assuming 'set_id' is a column in your DataFrame
+            'type': row['type'],  # Assuming 'type' is a column in your DataFrame
+            'correct_option': correct_option,
+            'correct_first_token': correct_token,
+            'correct_probability': token_probabilities.get(correct_token, 0),
+            'incorrect_option': incorrect_option,
+            'incorrect_first_token': incorrect_token,
+            'incorrect_probability': token_probabilities.get(incorrect_token, 0),
+            'predicted_answer': predicted_answer,
+        })
+
+    output_df = pd.DataFrame(output)
+    output_df.to_csv(output_path, index=False)
 
     return correct_predictions, total_predictions
 
@@ -218,24 +248,24 @@ def draw_all_plots(df, res_dir):
     # Split according to wording and center types
     # com wording
     df_first = df[df["type"] == "first_center"]
-    correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first)
+    correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
 
     df_second = df[df["type"] == "second_center"]
-    correct_predictions_second, total_predictions_second = predict_and_calculate_correct_predictions(model, tokenizer, df_second)
+    correct_predictions_second, total_predictions_second = predict_and_calculate_correct_predictions(model, tokenizer, df_second, output_path='second_center_output.csv')
 
     # nd wording
     df_first_nd = df[df["type"] == "first_center_nd"]
-    correct_predictions_first_nd, total_predictions_first_nd = predict_and_calculate_correct_predictions(model, tokenizer, df_first_nd)
+    correct_predictions_first_nd, total_predictions_first_nd = predict_and_calculate_correct_predictions(model, tokenizer, df_first_nd, output_path='first_center_nd_output.csv')
 
     df_second_nd = df[df["type"] == "second_center_nd"]
-    correct_predictions_second_nd, total_predictions_second_nd = predict_and_calculate_correct_predictions(model, tokenizer, df_second_nd)
+    correct_predictions_second_nd, total_predictions_second_nd = predict_and_calculate_correct_predictions(model, tokenizer, df_second_nd, output_path='second_center_nd_output.csv')
 
     # sim wording
     df_first_sim = df[df["type"] == "first_center_sim"]
-    correct_predictions_first_sim, total_predictions_first_sim = predict_and_calculate_correct_predictions(model, tokenizer, df_first_sim)
+    correct_predictions_first_sim, total_predictions_first_sim = predict_and_calculate_correct_predictions(model, tokenizer, df_first_sim, output_path='first_center_sim_output.csv')
 
     df_second_sim = df[df["type"] == "second_center_sim"]
-    correct_predictions_second_sim, total_predictions_second_sim = predict_and_calculate_correct_predictions(model, tokenizer, df_second_sim)    
+    correct_predictions_second_sim, total_predictions_second_sim = predict_and_calculate_correct_predictions(model, tokenizer, df_second_sim, output_path='second_center_sim_output.csv')
     
     # Compare accuracy between different wordings
     acc = calc_accuracy(correct_predictions_first + correct_predictions_second, total_predictions_first + total_predictions_second)

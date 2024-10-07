@@ -4,6 +4,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 
 MODEL_NANE = "lmsys/vicuna-7b-v1.3"
@@ -26,7 +27,6 @@ def generate_prompt(sentence, question):
     f"Answer: The")
 
     return prompt
-
 
 def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question, num_tokens=5):
     prompt = generate_prompt(sentence, question)
@@ -56,11 +56,10 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
         incorrect_first_token = incorrect_token_ids[1]
 
         # calc probability only on the first inference pass
+        valid_token_ids = list(set(correct_token_ids + incorrect_token_ids))
+        valid_token_ids.remove(1) # remove start token
+        next_token_logits_valid = next_token_logits[:, valid_token_ids]
         if it == 0:
-          valid_token_ids = list(set(correct_token_ids + incorrect_token_ids))
-          valid_token_ids.remove(1) # remove start token
-          next_token_logits_valid = next_token_logits[:, valid_token_ids]
-
           probabilities = torch.softmax(next_token_logits_valid, dim=-1)
           probabilities_list = probabilities.squeeze().tolist()
           token_probabilities = {token_id: prob for token_id, prob in zip(valid_token_ids, probabilities_list)}
@@ -135,12 +134,12 @@ def calc_accuracy(correct_predictions, total_predictions, print=False):
       print(f"Accuracy: {accuracy:.2f}%")
     return accuracy
 
-def plot_acc(names, values, title, xlabels, res_dir):
+def plot_acc(acc_dict, title, xlabels, res_dir):
   # Create a figure and axis
   fig, ax = plt.subplots(figsize=(8, 6))
 
   # Create the barplot
-  bars = ax.bar(names, values, color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'], edgecolor='black', alpha=0.85)
+  bars = ax.bar(list(acc_dict.keys()), list(acc_dict.values()), color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'], edgecolor='black', alpha=0.85)
 
   # Add the accuracy values on top of the bars
   for bar in bars:
@@ -244,76 +243,172 @@ def plot_grouped_barplot(categories, group_values, group_labels, xlabel, title, 
     # Show the plot after saving
     plt.show()
 
+def plot_confidence_grid(df, res_dir):
+    # Define the types and grid size
+    types = [
+        "first_center_com", "second_center_com",
+        "first_center_mid", "second_center_mid",
+        "first_center_sim", "second_center_sim",
+        "first_center_sim_rev", "second_center_sim_rev"
+    ]
+
+    # Create a grid of 4 rows and 4 columns (since we have 8 types, each with 2 plots)
+    fig, axes = plt.subplots(4, 4, figsize=(16, 16))
+    fig.tight_layout(pad=5.0)
+
+    # Flatten the axes array for easy iteration
+    axes = axes.flatten()
+
+    for i, t in enumerate(types):
+        # For wrong answers
+        wrong = df[(df["type"] == t) & (df["is_correct_prediction"] == False)]
+        sns.histplot(wrong["incorrect_probability"], bins=20, binwidth=0.05, kde=False, color='blue', alpha=0.5, label='incorrect', stat="percent", ax=axes[i*2])
+        axes[i*2].set_title(f'Confidence wrong {t}')
+        axes[i*2].set_xlabel('Probability')
+        axes[i*2].set_ylabel('Density')
+        axes[i*2].set_xlim(0, 1)
+        axes[i*2].set_ylim(0, 100)
+
+        # For correct answers
+        right = df[(df["type"] == t) & (df["is_correct_prediction"] == True)]
+        sns.histplot(right["correct_probability"], bins=20, binwidth=0.05, kde=False, color='green', alpha=0.5, label='correct', stat="percent", ax=axes[i*2+1])
+        axes[i*2+1].set_title(f'Confidence right {t}')
+        axes[i*2+1].set_xlabel('Probability')
+        axes[i*2+1].set_ylabel('Density')
+        axes[i*2+1].set_xlim(0, 1)
+        axes[i*2+1].set_ylim(0, 100)
+
+    # Save the entire grid plot
+    filename = 'confidence_grid.png'
+    file_path = os.path.join(res_dir, filename)
+    plt.savefig(file_path)
+    plt.show()
+
 def draw_all_plots(df, res_dir):
+    # Run the model to get predictions
+    correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df, output_path='examples_with_predictions.csv')
+    
     # Split according to wording and center types
-    # com wording
-    df_first = df[df["type"] == "first_center"]
-    correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
-
-    df_second = df[df["type"] == "second_center"]
-    correct_predictions_second, total_predictions_second = predict_and_calculate_correct_predictions(model, tokenizer, df_second, output_path='second_center_output.csv')
-
-    # nd wording
-    df_first_nd = df[df["type"] == "first_center_nd"]
-    correct_predictions_first_nd, total_predictions_first_nd = predict_and_calculate_correct_predictions(model, tokenizer, df_first_nd, output_path='first_center_nd_output.csv')
-
-    df_second_nd = df[df["type"] == "second_center_nd"]
-    correct_predictions_second_nd, total_predictions_second_nd = predict_and_calculate_correct_predictions(model, tokenizer, df_second_nd, output_path='second_center_nd_output.csv')
-
-    # sim wording
-    df_first_sim = df[df["type"] == "first_center_sim"]
-    correct_predictions_first_sim, total_predictions_first_sim = predict_and_calculate_correct_predictions(model, tokenizer, df_first_sim, output_path='first_center_sim_output.csv')
-
-    df_second_sim = df[df["type"] == "second_center_sim"]
-    correct_predictions_second_sim, total_predictions_second_sim = predict_and_calculate_correct_predictions(model, tokenizer, df_second_sim, output_path='second_center_sim_output.csv')
+    df = pd.read_csv('examples_with_predictions.csv')
     
-    # Compare accuracy between different wordings
-    acc = calc_accuracy(correct_predictions_first + correct_predictions_second, total_predictions_first + total_predictions_second)
-    acc_nd = calc_accuracy(correct_predictions_first_nd + correct_predictions_second_nd, total_predictions_first_nd + total_predictions_second_nd)
-    acc_sim = calc_accuracy(correct_predictions_first_sim + correct_predictions_second_sim, total_predictions_first_sim + total_predictions_second_sim)
+    correct_preds_dict={}
+    total_preds_dict={}
 
-    plot_acc(["com", "nd", "sim"], [acc, acc_nd, acc_sim], "Accuracy according to wording", "wordings", res_dir)
+    for sen_type in df["type"].unique():
+      sen_type_df= df[df["type"] == sen_type]
+      correct_predictions= len(sen_type_df[sen_type_df["is_correct_prediction"]==1])
+      correct_preds_dict[sen_type]= correct_predictions
+      total_predictions= len(sen_type_df)
+      total_preds_dict[sen_type]= total_predictions
+
+    # Sanity check
+    assert (sum(correct_preds_dict.values()) == correct_predictions_all)
+    assert (sum(total_preds_dict.values()) == total_predictions_all)
     
-        # Compare according to different types
-    acc_first = calc_accuracy(correct_predictions_first + correct_predictions_first_nd + correct_predictions_first_sim,
-                              total_predictions_first + total_predictions_first_nd + total_predictions_first_sim)
+    # plots
+    wordings = ["com", "mid", "sim", "sim_rev"]
+    all_center_types = ["first_center", "second_center"]
 
-    acc_second = calc_accuracy(correct_predictions_second + correct_predictions_second_nd + correct_predictions_second_sim,
-                              total_predictions_second + total_predictions_second_nd + total_predictions_second_sim)
+    # Calculate accuracy for each wording separately
+    wording_accuracy = {}
 
-    plot_acc(["first center", "second center"], [acc_first, acc_second], "Accuracy according to center type", "center type", res_dir)
+    for wording in wordings:
+      correct_predictions = 0
+      total_predictions = 0
+      for center_type in all_center_types:
+        correct_predictions += correct_preds_dict[center_type + "_" + wording]
+        total_predictions += total_preds_dict[center_type + "_" + wording]
+      wording_accuracy[wording] = calc_accuracy(correct_predictions, total_predictions)
+
+    plot_acc(wording_accuracy, "Accuracy according to wording", "wordings", res_dir)
+    
+    # Compare according to different types
+    center_types_accuracy = {}
+
+    for center_type in all_center_types:
+      correct_predictions = 0
+      total_predictions = 0
+      for wording in wordings:
+        correct_predictions += correct_preds_dict[center_type + "_" + wording]
+        total_predictions += total_preds_dict[center_type + "_" + wording]
+      center_types_accuracy[center_type] = calc_accuracy(correct_predictions, total_predictions)
+
+    plot_acc(center_types_accuracy, "Accuracy according to center type", "center type", res_dir)
 
     # Draw a plot of accuracy by wording category and center type as group
-    wordings = ['com', 'nd', 'sim']
-    types = ["first center", "second center"]
-    accuracy_type_1 = [calc_accuracy(correct_predictions_first, total_predictions_first),
-                       calc_accuracy(correct_predictions_first_nd, total_predictions_first_nd),
-                       calc_accuracy(correct_predictions_first_sim, total_predictions_first_sim)]
 
-    accuracy_type_2 = [calc_accuracy(correct_predictions_second, total_predictions_second),
-                       calc_accuracy(correct_predictions_second_nd, total_predictions_second_nd),
-                       calc_accuracy(correct_predictions_second_sim, total_predictions_second_sim)]
+    acc_by_wording_center_type = []
 
-    values = [accuracy_type_1, accuracy_type_2]
-    plot_grouped_barplot(wordings, values, types, "wordings", "Accuracy by wording and center type", res_dir)
+    for center_type in all_center_types:
+      wording_acc = []
+      for wording in wordings:
+        correct_predictions = correct_preds_dict[center_type + "_" + wording]
+        total_predictions = total_preds_dict[center_type + "_" + wording]
+        wording_acc.append(calc_accuracy(correct_predictions, total_predictions))
+      acc_by_wording_center_type.append(wording_acc)
+
+    plot_grouped_barplot(wordings, acc_by_wording_center_type, all_center_types, "wordings", "Accuracy by wording and center type", res_dir)
 
     # Draw a plot of accuracy by center type as category and wording as group
-    wordings = ['com', 'nd', 'sim']
-    center_types = ["first center", "second center"]
+    acc_by_center_type_wording = []
 
-    accuracy_com = [calc_accuracy(correct_predictions_first, total_predictions_first), #type 1
-                       calc_accuracy(correct_predictions_second, total_predictions_second)] #type 2
+    for wording in wordings:
+      center_type_acc = []
+      for center_type in all_center_types:
+        correct_predictions = correct_preds_dict[center_type + "_" + wording]
+        total_predictions = total_preds_dict[center_type + "_" + wording]
+        center_type_acc.append(calc_accuracy(correct_predictions, total_predictions))
+      acc_by_center_type_wording.append(center_type_acc)
 
-    accuracy_nd = [calc_accuracy(correct_predictions_first_nd, total_predictions_first_nd), #type 1
-                       calc_accuracy(correct_predictions_second_nd, total_predictions_second_nd)] #type 2
+    plot_grouped_barplot(all_center_types, acc_by_center_type_wording, wordings, "center types", "Accuracy by center type and wording", res_dir)
 
-    accuracy_sim = [calc_accuracy(correct_predictions_first_sim, total_predictions_first_sim), #type 1
-                       calc_accuracy(correct_predictions_second_sim, total_predictions_second_sim)] #type 2
+    # Check model confidence for right answers
 
+    wrong = df[(df["is_correct_prediction"] == False)]
+    right = df[(df["is_correct_prediction"] == True)]
 
-    values = [accuracy_com, accuracy_nd, accuracy_sim]
-    plot_grouped_barplot(types, values, wordings, "center types", "Accuracy by center type and wording", res_dir)
+    plt.figure(figsize=(10, 6))
 
+    # Plot histogram for first list
+    sns.histplot(right["correct_probability"] , bins=20, kde=False, color='blue', alpha=0.5, label='right', stat="density")
+
+    # Add labels and title
+    title = 'Model confidence for right answers'
+    plt.title(title)
+    plt.xlabel('Probability')
+    plt.ylabel('Density')
+
+    # Save the plot
+    filename = title.lower().replace(' ', '_') + '.png'
+    file_path = os.path.join(res_dir, filename)
+    plt.savefig(file_path)
+    # Show the plot
+    plt.show()
+    
+
+    # Check model confidence for wrong answers
+    wrong = df[(df["is_correct_prediction"] == False)]
+    right = df[(df["is_correct_prediction"] == True)]
+
+    plt.figure(figsize=(10, 6))
+
+    # Plot histogram for second list
+    sns.histplot(wrong["incorrect_probability"], bins=20, kde=False, color='green', alpha=0.5, label='wrong', stat="density")
+
+    # Add labels and title
+    title = 'Model confidence for wrong answers'
+    plt.title(title)
+    plt.xlabel('Probability')
+    plt.ylabel('Density')
+
+    # Save the plot
+    filename = title.lower().replace(' ', '_') + '.png'
+    file_path = os.path.join(res_dir, filename)
+    plt.savefig(file_path)
+    # Show the plot
+    plt.show()
+    
+    plot_confidence_grid(df, res_dir)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

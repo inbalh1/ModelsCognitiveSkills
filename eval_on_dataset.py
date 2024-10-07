@@ -243,6 +243,24 @@ def plot_grouped_barplot(categories, group_values, group_labels, xlabel, title, 
     # Show the plot after saving
     plt.show()
 
+def plot_confidence(confidence, res_dir, title, color="blue"):
+  plt.figure(figsize=(10, 6))
+
+  # Plot histogram for first list
+  sns.histplot(confidence , bins=20, kde=False, color=color, alpha=0.5, label='right', stat="density")
+
+  # Add labels and title
+  plt.title(title)
+  plt.xlabel('Probability')
+  plt.ylabel('Density')
+
+  # Save the plot
+  filename = title.lower().replace(' ', '_') + '.png'
+  file_path = os.path.join(res_dir, filename)
+  plt.savefig(file_path)
+  # Show the plot
+  plt.show()
+
 def plot_confidence_grid(df, res_dir):
     # Define the types and grid size
     types = [
@@ -284,12 +302,22 @@ def plot_confidence_grid(df, res_dir):
     plt.savefig(file_path)
     plt.show()
 
-def draw_all_plots(df, res_dir):
+def run(data_path, out_path):
+  df = pd.read_csv(data_path)
+  correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df, output_path=out_path)
+  # Run on only a part of the df
+  #df_first = df[df["type"] == "first_center_sim"]
+  #correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
+  #print(correct_predictions_first)
+  #print(total_predictions_first)
+  return correct_predictions_all, total_predictions_all
+
+def draw_all_plots(data_path, out_path, res_dir):
     # Run the model to get predictions
-    correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df, output_path='examples_with_predictions.csv')
+    correct_predictions_all, total_predictions_all = run(data_path, out_path)
     
     # Split according to wording and center types
-    df = pd.read_csv('examples_with_predictions.csv')
+    df = pd.read_csv(out_path)
     
     correct_preds_dict={}
     total_preds_dict={}
@@ -363,51 +391,13 @@ def draw_all_plots(df, res_dir):
     plot_grouped_barplot(all_center_types, acc_by_center_type_wording, wordings, "center types", "Accuracy by center type and wording", res_dir)
 
     # Check model confidence for right answers
-
-    wrong = df[(df["is_correct_prediction"] == False)]
     right = df[(df["is_correct_prediction"] == True)]
-
-    plt.figure(figsize=(10, 6))
-
-    # Plot histogram for first list
-    sns.histplot(right["correct_probability"] , bins=20, kde=False, color='blue', alpha=0.5, label='right', stat="density")
-
-    # Add labels and title
-    title = 'Model confidence for right answers'
-    plt.title(title)
-    plt.xlabel('Probability')
-    plt.ylabel('Density')
-
-    # Save the plot
-    filename = title.lower().replace(' ', '_') + '.png'
-    file_path = os.path.join(res_dir, filename)
-    plt.savefig(file_path)
-    # Show the plot
-    plt.show()
-    
+    plot_confidence(right["correct_probability"], res_dir, title='Model confidence for right answers')    
 
     # Check model confidence for wrong answers
     wrong = df[(df["is_correct_prediction"] == False)]
-    right = df[(df["is_correct_prediction"] == True)]
+    plot_confidence(wrong["incorrect_probability"], res_dir, title='Model confidence for wrong answers', color="green")
 
-    plt.figure(figsize=(10, 6))
-
-    # Plot histogram for second list
-    sns.histplot(wrong["incorrect_probability"], bins=20, kde=False, color='green', alpha=0.5, label='wrong', stat="density")
-
-    # Add labels and title
-    title = 'Model confidence for wrong answers'
-    plt.title(title)
-    plt.xlabel('Probability')
-    plt.ylabel('Density')
-
-    # Save the plot
-    filename = title.lower().replace(' ', '_') + '.png'
-    file_path = os.path.join(res_dir, filename)
-    plt.savefig(file_path)
-    # Show the plot
-    plt.show()
-    
     plot_confidence_grid(df, res_dir)
 
 if __name__ == '__main__':
@@ -431,10 +421,9 @@ if __name__ == '__main__':
     if not os.path.exists(res_dir):
         os.makedirs(res_dir)
         
-
-    data_df= pd.read_csv(args.data_path)
-    # data_df = pd.from_csv(args.data_path)
-    draw_all_plots(data_df, res_dir)
+    # Path for saving model predictions
+    out_path = os.path.join(res_dir, "examples_with_predictions.csv")
+    draw_all_plots(data_path=args.data_path, out_path=out_path, res_dir=res_dir)
 
 
 

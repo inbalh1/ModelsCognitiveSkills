@@ -280,19 +280,25 @@ def plot_confidence_grid(df, res_dir):
     for i, t in enumerate(types):
         # For wrong answers
         wrong = df[(df["type"] == t) & (df["is_correct_prediction"] == False)]
-        sns.histplot(wrong["incorrect_probability"], bins=20, binwidth=0.05, kde=False, color='blue', alpha=0.5, label='incorrect', stat="percent", ax=axes[i*2])
+        median_wrong = wrong["incorrect_probability"].median()  # Calculate median for wrong
+        sns.histplot(wrong["incorrect_probability"], bins=20, binwidth=0.025, kde=False, color='blue', alpha=0.5, label='incorrect', stat="percent", ax=axes[i*2])
+        axes[i*2].axvline(median_wrong, color='red', linestyle='--', linewidth=2)  # Add vertical line at median
+        axes[i*2].text(median_wrong, 90, f'{median_wrong:.2f}', color='red', fontsize=10, va='center', ha='right', backgroundcolor='white')  # Add median value text
         axes[i*2].set_title(f'Confidence wrong {t}')
         axes[i*2].set_xlabel('Probability')
-        axes[i*2].set_ylabel('Density')
+        axes[i*2].set_ylabel('Percent')
         axes[i*2].set_xlim(0, 1)
         axes[i*2].set_ylim(0, 100)
 
         # For correct answers
         right = df[(df["type"] == t) & (df["is_correct_prediction"] == True)]
-        sns.histplot(right["correct_probability"], bins=20, binwidth=0.05, kde=False, color='green', alpha=0.5, label='correct', stat="percent", ax=axes[i*2+1])
+        median_right = right["correct_probability"].median()  # Calculate median for correct
+        sns.histplot(right["correct_probability"], bins=20, binwidth=0.025, kde=False, color='green', alpha=0.5, label='correct', stat="percent", ax=axes[i*2+1])
+        axes[i*2+1].axvline(median_right, color='red', linestyle='--', linewidth=2)  # Add vertical line at median
+        axes[i*2+1].text(median_right, 90, f'{median_right:.2f}', color='red', fontsize=10, va='center', ha='right', backgroundcolor='white')  # Add median value text
         axes[i*2+1].set_title(f'Confidence right {t}')
         axes[i*2+1].set_xlabel('Probability')
-        axes[i*2+1].set_ylabel('Density')
+        axes[i*2+1].set_ylabel('Percent')
         axes[i*2+1].set_xlim(0, 1)
         axes[i*2+1].set_ylim(0, 100)
 

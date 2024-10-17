@@ -28,6 +28,7 @@ def generate_prompt(sentence, question):
 
     return prompt
 
+
 def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question, num_tokens=5):
     prompt = generate_prompt(sentence, question)
     input_ids_sentence = tokenizer(prompt, return_tensors="pt").input_ids.to(DEVICE)
@@ -37,32 +38,42 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
     # Get the possible token IDs (correct and incorrect tokens)
     correct_token_ids = correct_tokens.tolist()
     incorrect_token_ids = incorrect_tokens.tolist()
+    valid_token_ids = list(set(correct_token_ids + incorrect_token_ids))
+    if tokenizer.bos_token_id is not None:
+        valid_token_ids.remove(tokenizer.bos_token_id)
 
     # Initialize the predicted tokens list with the sentence input
     generated_ids = input_ids_sentence
     answer_ids = tokenizer.encode("The")
+    is_first_diff_token = False
 
     # here we are generting sequence in num_tokens length, to handle multiple tokens answers
     # in the accuracy calculation we will ceck only the first token of the answer
     for it in range(num_tokens):
+        if len(correct_token_ids) > it and len(incorrect_token_ids) > it and correct_token_ids[it] == incorrect_token_ids[it]:
+            if correct_token_ids[it] != tokenizer.bos_token_id:
+                generated_ids = torch.cat((generated_ids, torch.tensor([[correct_token_ids[it]]], device=generated_ids.device)), dim=-1)
+                answer_ids.append(correct_token_ids[it])
+            continue
+
         with torch.no_grad():
             outputs = model(generated_ids)
             logits = outputs.logits
 
         next_token_logits = logits[:, -1, :]
-
-        # Extract logits only for the tokens in correct and incorrect options
-        correct_first_token = correct_token_ids[1]
-        incorrect_first_token = incorrect_token_ids[1]
-
-        # calc probability only on the first inference pass
-        valid_token_ids = list(set(correct_token_ids + incorrect_token_ids))
-        valid_token_ids.remove(1) # remove start token
         next_token_logits_valid = next_token_logits[:, valid_token_ids]
-        if it == 0:
-          probabilities = torch.softmax(next_token_logits_valid, dim=-1)
-          probabilities_list = probabilities.squeeze().tolist()
-          token_probabilities = {token_id: prob for token_id, prob in zip(valid_token_ids, probabilities_list)}
+
+        # Extract logits only for the tokens in correct and incorrect options and calc the probabilities
+        if not is_first_diff_token:
+            is_first_diff_token = True
+            correct_first_token = correct_token_ids[it]
+            incorrect_first_token = incorrect_token_ids[it]
+            probabilities_token_ids = [correct_first_token,incorrect_first_token]
+            probabilities_logits = next_token_logits[:,probabilities_token_ids]
+            # calculate probabilities over first different tokens
+            probabilities = torch.softmax(probabilities_logits, dim=-1)
+            probabilities_list = probabilities.squeeze().tolist()
+            token_probabilities = {token_id: prob for token_id, prob in zip(probabilities_token_ids, probabilities_list)}
 
         # Find the argmax of the valid token logits
         predicted_token_id = valid_token_ids[torch.argmax(next_token_logits_valid)]
@@ -74,8 +85,9 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
     predicted_text = tokenizer.decode(answer_ids, skip_special_tokens=True)
     return predicted_text, token_probabilities, correct_first_token, incorrect_first_token
 
+
 def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
-                                              output_path='output.csv', print=False):
+                                              output_path='output.csv', should_print=False):
     correct_predictions = 0
     total_predictions = 0
 
@@ -89,15 +101,16 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
         question = row['question']
 
         predicted_answer, token_probabilities, correct_token, incorrect_token = \
-          predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question)
-        if print:
-          print(f"Sentence: {sentence}")
-          print(f"Correct Option: {correct_option}")
-          print(f"Incorrect Option: {incorrect_option}")
-          print(f"True Answer: {true_answer}")
-          print(f"Predicted Answer: {predicted_answer}")
+            predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question)
+        if should_print:
+            print(f"Sentence: {sentence}")
+            print(f"Correct Option: {correct_option}")
+            print(f"Incorrect Option: {incorrect_option}")
+            print(f"True Answer: {true_answer}")
+            print(f"Predicted Answer: {predicted_answer}")
 
-        if predicted_answer.startswith(true_answer):
+        is_correct_prediction = predicted_answer.startswith(true_answer)
+        if is_correct_prediction:
             correct_predictions += 1
             if print:
               print("Correct prediction!")
@@ -112,8 +125,12 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
 
 
         output.append({
-            'set_id': row['set_id'],  # Assuming 'set_id' is a column in your DataFrame
-            'type': row['type'],  # Assuming 'type' is a column in your DataFrame
+            # Add all columns from original df, and some additional information
+            'sentence': row['sentence'],
+            'question': row['question'],
+            'set_id': row['set_id'],
+            'type': row['type'],
+            'answer': row['answer'],
             'correct_option': correct_option,
             'correct_first_token': correct_token,
             'correct_probability': token_probabilities.get(correct_token, 0),
@@ -121,6 +138,7 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
             'incorrect_first_token': incorrect_token,
             'incorrect_probability': token_probabilities.get(incorrect_token, 0),
             'predicted_answer': predicted_answer,
+            'is_correct_prediction': is_correct_prediction
         })
 
     output_df = pd.DataFrame(output)
@@ -131,47 +149,49 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
 def calc_accuracy(correct_predictions, total_predictions, print=False):
     accuracy = correct_predictions / total_predictions * 100
     if print:
-      print(f"Accuracy: {accuracy:.2f}%")
+        print(f"Accuracy: {accuracy:.2f}%")
     return accuracy
 
+
 def plot_acc(acc_dict, title, xlabels, res_dir):
-  # Create a figure and axis
-  fig, ax = plt.subplots(figsize=(8, 6))
+    # Create a figure and axis
+    fig, ax = plt.subplots(figsize=(8, 6))
 
-  # Create the barplot
-  bars = ax.bar(list(acc_dict.keys()), list(acc_dict.values()), color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'], edgecolor='black', alpha=0.85)
+    # Create the barplot
+    bars = ax.bar(list(acc_dict.keys()), list(acc_dict.values()), color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'], edgecolor='black', alpha=0.85)
 
-  # Add the accuracy values on top of the bars
-  for bar in bars:
-      height = bar.get_height()
-      ax.annotate(f'{height:.2f}',
-                  xy=(bar.get_x() + bar.get_width() / 2, height),  # Place the text at the top of the bar
-                  xytext=(0, 3),  # Slightly above the bar
-                  textcoords="offset points",
-                  ha='center', va='bottom', fontsize=12, color='black', fontweight='bold')
+    # Add the accuracy values on top of the bars
+    for bar in bars:
+        height = bar.get_height()
+        ax.annotate(f'{height:.2f}',
+                    xy=(bar.get_x() + bar.get_width() / 2, height),  # Place the text at the top of the bar
+                    xytext=(0, 3),  # Slightly above the bar
+                    textcoords="offset points",
+                    ha='center', va='bottom', fontsize=12, color='black', fontweight='bold')
 
-  # Set the title and labels
-  ax.set_title(title, fontsize=16, fontweight='bold')
-  ax.set_xlabel(xlabels, fontsize=14)
-  ax.set_ylabel('Accuracy', fontsize=14)
+    # Set the title and labels
+    ax.set_title(title, fontsize=16, fontweight='bold')
+    ax.set_xlabel(xlabels, fontsize=14)
+    ax.set_ylabel('Accuracy', fontsize=14)
 
-  # Improve layout and aesthetics
-  ax.spines['top'].set_visible(False)
-  ax.spines['right'].set_visible(False)
-  ax.spines['left'].set_color('#4c4c4c')
-  ax.spines['bottom'].set_color('#4c4c4c')
-  ax.yaxis.grid(True, linestyle='--', color='gray', alpha=0.7)
+    # Improve layout and aesthetics
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_color('#4c4c4c')
+    ax.spines['bottom'].set_color('#4c4c4c')
+    ax.yaxis.grid(True, linestyle='--', color='gray', alpha=0.7)
 
-  plt.tight_layout()
+    plt.tight_layout()
 
-  # Save the plot
-  filename = title.lower().replace(' ', '_') + '.png'
-  file_path = os.path.join(res_dir, filename)
-  plt.savefig(file_path)
+    # Save the plot
+    filename = title.lower().replace(' ', '_') + '.png'
+    file_path = os.path.join(res_dir, filename)
+    plt.savefig(file_path)
 
-  # Show the plot
-  plt.show()
+    # Show the plot
+    plt.show()
   
+
 def plot_grouped_barplot(categories, group_values, group_labels, xlabel, title, res_dir):
     """
     Function to create a grouped bar plot for categories with multiple groups of values.
@@ -243,23 +263,25 @@ def plot_grouped_barplot(categories, group_values, group_labels, xlabel, title, 
     # Show the plot after saving
     plt.show()
 
+
 def plot_confidence(confidence, res_dir, title, color="blue"):
-  plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 6))
 
-  # Plot histogram for first list
-  sns.histplot(confidence , bins=20, kde=False, color=color, alpha=0.5, label='right', stat="density")
+    # Plot histogram for first list
+    sns.histplot(confidence , bins=20, kde=False, color=color, alpha=0.5, label='right', stat="density")
 
-  # Add labels and title
-  plt.title(title)
-  plt.xlabel('Probability')
-  plt.ylabel('Density')
+    # Add labels and title
+    plt.title(title)
+    plt.xlabel('Probability')
+    plt.ylabel('Density')
 
-  # Save the plot
-  filename = title.lower().replace(' ', '_') + '.png'
-  file_path = os.path.join(res_dir, filename)
-  plt.savefig(file_path)
-  # Show the plot
-  plt.show()
+    # Save the plot
+    filename = title.lower().replace(' ', '_') + '.png'
+    file_path = os.path.join(res_dir, filename)
+    plt.savefig(file_path)
+    # Show the plot
+    plt.show()
+
 
 def plot_confidence_grid(df, res_dir):
     # Define the types and grid size
@@ -308,15 +330,17 @@ def plot_confidence_grid(df, res_dir):
     plt.savefig(file_path)
     plt.show()
 
+
 def run(data_path, out_path):
-  df = pd.read_csv(data_path)
-  correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df, output_path=out_path)
-  # Run on only a part of the df
-  #df_first = df[df["type"] == "first_center_sim"]
-  #correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
-  #print(correct_predictions_first)
-  #print(total_predictions_first)
-  return correct_predictions_all, total_predictions_all
+    df = pd.read_csv(data_path)
+    correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df, output_path=out_path)
+    # Run on only a part of the df
+    #df_first = df[df["type"] == "first_center_sim"]
+    #correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
+    #print(correct_predictions_first)
+    #print(total_predictions_first)
+    return correct_predictions_all, total_predictions_all
+
 
 def draw_all_plots(data_path, out_path, res_dir):
     # Run the model to get predictions
@@ -329,11 +353,11 @@ def draw_all_plots(data_path, out_path, res_dir):
     total_preds_dict={}
 
     for sen_type in df["type"].unique():
-      sen_type_df= df[df["type"] == sen_type]
-      correct_predictions= len(sen_type_df[sen_type_df["is_correct_prediction"]==1])
-      correct_preds_dict[sen_type]= correct_predictions
-      total_predictions= len(sen_type_df)
-      total_preds_dict[sen_type]= total_predictions
+        sen_type_df= df[df["type"] == sen_type]
+        correct_predictions= len(sen_type_df[sen_type_df["is_correct_prediction"]==1])
+        correct_preds_dict[sen_type]= correct_predictions
+        total_predictions= len(sen_type_df)
+        total_preds_dict[sen_type]= total_predictions
 
     # Sanity check
     assert (sum(correct_preds_dict.values()) == correct_predictions_all)
@@ -347,12 +371,12 @@ def draw_all_plots(data_path, out_path, res_dir):
     wording_accuracy = {}
 
     for wording in wordings:
-      correct_predictions = 0
-      total_predictions = 0
-      for center_type in all_center_types:
-        correct_predictions += correct_preds_dict[center_type + "_" + wording]
-        total_predictions += total_preds_dict[center_type + "_" + wording]
-      wording_accuracy[wording] = calc_accuracy(correct_predictions, total_predictions)
+        correct_predictions = 0
+        total_predictions = 0
+        for center_type in all_center_types:
+            correct_predictions += correct_preds_dict[center_type + "_" + wording]
+            total_predictions += total_preds_dict[center_type + "_" + wording]
+        wording_accuracy[wording] = calc_accuracy(correct_predictions, total_predictions)
 
     plot_acc(wording_accuracy, "Accuracy according to wording", "wordings", res_dir)
     
@@ -360,12 +384,12 @@ def draw_all_plots(data_path, out_path, res_dir):
     center_types_accuracy = {}
 
     for center_type in all_center_types:
-      correct_predictions = 0
-      total_predictions = 0
-      for wording in wordings:
-        correct_predictions += correct_preds_dict[center_type + "_" + wording]
-        total_predictions += total_preds_dict[center_type + "_" + wording]
-      center_types_accuracy[center_type] = calc_accuracy(correct_predictions, total_predictions)
+        correct_predictions = 0
+        total_predictions = 0
+        for wording in wordings:
+            correct_predictions += correct_preds_dict[center_type + "_" + wording]
+            total_predictions += total_preds_dict[center_type + "_" + wording]
+        center_types_accuracy[center_type] = calc_accuracy(correct_predictions, total_predictions)
 
     plot_acc(center_types_accuracy, "Accuracy according to center type", "center type", res_dir)
 
@@ -374,12 +398,12 @@ def draw_all_plots(data_path, out_path, res_dir):
     acc_by_wording_center_type = []
 
     for center_type in all_center_types:
-      wording_acc = []
-      for wording in wordings:
-        correct_predictions = correct_preds_dict[center_type + "_" + wording]
-        total_predictions = total_preds_dict[center_type + "_" + wording]
-        wording_acc.append(calc_accuracy(correct_predictions, total_predictions))
-      acc_by_wording_center_type.append(wording_acc)
+        wording_acc = []
+        for wording in wordings:
+            correct_predictions = correct_preds_dict[center_type + "_" + wording]
+            total_predictions = total_preds_dict[center_type + "_" + wording]
+            wording_acc.append(calc_accuracy(correct_predictions, total_predictions))
+        acc_by_wording_center_type.append(wording_acc)
 
     plot_grouped_barplot(wordings, acc_by_wording_center_type, all_center_types, "wordings", "Accuracy by wording and center type", res_dir)
 
@@ -387,12 +411,12 @@ def draw_all_plots(data_path, out_path, res_dir):
     acc_by_center_type_wording = []
 
     for wording in wordings:
-      center_type_acc = []
-      for center_type in all_center_types:
-        correct_predictions = correct_preds_dict[center_type + "_" + wording]
-        total_predictions = total_preds_dict[center_type + "_" + wording]
-        center_type_acc.append(calc_accuracy(correct_predictions, total_predictions))
-      acc_by_center_type_wording.append(center_type_acc)
+        center_type_acc = []
+        for center_type in all_center_types:
+            correct_predictions = correct_preds_dict[center_type + "_" + wording]
+            total_predictions = total_preds_dict[center_type + "_" + wording]
+            center_type_acc.append(calc_accuracy(correct_predictions, total_predictions))
+        acc_by_center_type_wording.append(center_type_acc)
 
     plot_grouped_barplot(all_center_types, acc_by_center_type_wording, wordings, "center types", "Accuracy by center type and wording", res_dir)
 
@@ -405,6 +429,7 @@ def draw_all_plots(data_path, out_path, res_dir):
     plot_confidence(wrong["incorrect_probability"], res_dir, title='Model confidence for wrong answers', color="green")
 
     plot_confidence_grid(df, res_dir)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -430,9 +455,3 @@ if __name__ == '__main__':
     # Path for saving model predictions
     out_path = os.path.join(res_dir, "examples_with_predictions.csv")
     draw_all_plots(data_path=args.data_path, out_path=out_path, res_dir=res_dir)
-
-
-
-    
-
-

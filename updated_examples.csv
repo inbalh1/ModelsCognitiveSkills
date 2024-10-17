@@ -279,13 +279,13 @@ The gardener that the neighbor that the child loved helped planted flowers.,Who 
 "There is that neighbor loved by the child, so the gardener, who was helped by the neighbor, planted flowers.",Who did the neighbor help?,36,first_center_sim,The gardener,gardener,child
 "The gardener, who was helped by the neighbor, planted flowers. The neighbor is the one loved by the child.",Who did the child love?,36,second_center_sim_rev,The neighbor,neighbor,gardener
 "The gardener, who was helped by the neighbor, planted flowers. The neighbor is the one loved by the child.",Who did the neighbor help?,36,first_center_sim_rev,The gardener,gardener,child
-The baker that the chef that the confectioner thanked recommended baked bread.,Who did the confectioner thank?,37,second_center_com,The chef,baker,chef
+The baker that the chef that the confectioner thanked recommended baked bread.,Who did the confectioner thank?,37,second_center_com,The chef,chef,baker
 The baker that the confectioner that the chef recommended thanked baked bread.,Who did the chef recommend?,37,first_center_com,The baker,baker,confectioner
-"The baker, who was recommended by the chef thanked by the confectioner, baked bread.",Who did the confectioner thank?,37,second_center_mid,The chef,baker,chef
+"The baker, who was recommended by the chef thanked by the confectioner, baked bread.",Who did the confectioner thank?,37,second_center_mid,The chef,chef,baker
 "The baker, who was recommended by the chef thanked by the confectioner, baked bread.",Who did the chef recommend?,37,first_center_mid,The baker,baker,confectioner
-"There is that chef thanked by the confectioner, so the baker, who was recommended by the chef, baked bread.",Who did the confectioner thank?,37,second_center_sim,The chef,baker,chef
+"There is that chef thanked by the confectioner, so the baker, who was recommended by the chef, baked bread.",Who did the confectioner thank?,37,second_center_sim,The chef,chef,baker
 "There is that chef thanked by the confectioner, so the baker, who was recommended by the chef, baked bread.",Who did the chef recommend?,37,first_center_sim,The baker,baker,confectioner
-"The baker, who was recommended by the chef, baked bread. The chef is the one thanked by the confectioner.",Who did the confectioner thank?,37,second_center_sim_rev,The chef,baker,chef
+"The baker, who was recommended by the chef, baked bread. The chef is the one thanked by the confectioner.",Who did the confectioner thank?,37,second_center_sim_rev,The chef,chef,baker
 "The baker, who was recommended by the chef, baked bread. The chef is the one thanked by the confectioner.",Who did the chef recommend?,37,first_center_sim_rev,The baker,baker,confectioner
 The firefighter that the mayor that the citizen admired awarded saved a family.,Who did the citizen admire?,38,second_center_com,The mayor,mayor,firefighter
 The firefighter that the mayor that the citizen admired awarded saved a family.,Who did the mayor award?,38,first_center_com,The firefighter,firefighter,citizen

@@ -1,0 +1,52 @@
+first center right
+U-statistic: 1116.0
+P-value: 4.6462759127380406e-10
+Reject the null hypothesis: non com has significantly larger values.
+
+first center right
+U-statistic: 1116.0
+P-value: 4.6462759127380406e-10
+Reject the null hypothesis: non com has significantly larger values.
+
+first center wrong
+first center right
+U-statistic: 1116.0
+P-value: 4.6462759127380406e-10
+Reject the null hypothesis: non com has significantly larger values.
+
+first center wrong
+first center right
+U-statistic: 1116.0
+P-value: 4.6462759127380406e-10
+Reject the null hypothesis: non com has significantly larger values.
+
+first center wrong
+Not enough data to perform test
+second center right
+U-statistic: 368.0
+P-value: 3.925467440705513e-05
+Reject the null hypothesis: non com has significantly larger values.
+
+second center wrong
+U-statistic: 212.0
+P-value: 0.9944045347487385
+Fail to reject the null hypothesis: No significant difference.
+
+first center right
+U-statistic: 1116.0
+P-value: 4.6462759127380406e-10
+Reject the null hypothesis: non com has significantly larger values.
+
+first center wrong
+Not enough data to perform test
+
+second center right
+U-statistic: 368.0
+P-value: 3.925467440705513e-05
+Reject the null hypothesis: non com has significantly larger values.
+
+second center wrong
+U-statistic: 212.0
+P-value: 0.9944045347487385
+Fail to reject the null hypothesis: No significant difference.
+

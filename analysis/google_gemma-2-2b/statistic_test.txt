@@ -1,0 +1,20 @@
+first center right
+U-statistic: 1970.5
+P-value: 0.0032383653622382845
+Reject the null hypothesis: non com has significantly larger values.
+
+first center wrong
+U-statistic: 33.0
+P-value: 0.3225490196078431
+Fail to reject the null hypothesis: No significant difference.
+
+second center right
+U-statistic: 379.0
+P-value: 0.5077758182739393
+Fail to reject the null hypothesis: No significant difference.
+
+second center wrong
+U-statistic: 1338.5
+P-value: 0.026360695545147687
+Reject the null hypothesis: non com has significantly lower values.
+

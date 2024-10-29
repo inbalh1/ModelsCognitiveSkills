@@ -1,0 +1,5 @@
+sentence,question,set_id,type,answer,correct_option,correct_first_token,correct_probability,incorrect_option,incorrect_first_token,incorrect_probability,predicted_answer,is_correct_prediction
+The child that the neighbor that the guest scared liked fell.,Who did the guest scare?,1,second_center_com,The neighbor,neighbor,37569,0.6959583163261414,child,3124,0.3040416538715362,Theneighborchildchildchild,True
+"There is that neighbor scared by the guest, so the child, who was liked by the neighbor, fell.",Who did the guest scare?,1,second_center_sim,The neighbor,neighbor,37569,0.2450850158929824,child,3124,0.7549149990081787,Thechildchildchildchild,False
+The programmer that the engineer that the manager promoted collaborated with laughed.,Who did the manager promote?,16,second_center_com,The engineer,engineer,8680,0.6976089477539062,programmer,15252,0.3023911118507385,Theengineerengineer,True
+"There is that engineer promoted by the manager, so the programmer, who collaborated with the engineer, laughed.",Who did the manager promote?,16,second_center_sim,The engineer,engineer,8680,0.1931473761796951,programmer,15252,0.8068526387214661,Theprogrammerengineer,False

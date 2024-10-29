@@ -1,0 +1,3 @@
+sentence,question,set_id,type,answer,correct_option,correct_first_token,correct_probability,incorrect_option,incorrect_first_token,incorrect_probability,predicted_answer,is_correct_prediction
+The player that the coach that the fan adored shouted at scored a goal.,Who did the fan adore?,29,second_center_com,The coach,coach,11182,0.5888891220092773,player,4847,0.4111108481884002,The coach player player player,True
+"There is that coach adored by the fan, so the player, who was shouted at by the coach, scored a goal.",Who did the fan adore?,29,second_center_sim,The coach,coach,11182,0.3451052904129028,player,4847,0.6548947095870972,The player player player player,False

@@ -1,0 +1,3 @@
+sentence,question,set_id,type,answer,correct_option,correct_first_token,correct_probability,incorrect_option,incorrect_first_token,incorrect_probability,predicted_answer,is_correct_prediction
+The thief that the mover that the architect knew surprised got caught.,Who did the architect know?,3,second_center_com,The mover,mover,76,0.590779185295105,thief,339,0.4092207849025726,Themoverthief,True
+"There is that mover known by the architect, so the thief, who was surprised by the mover, got caught.",Who did the architect know?,3,second_center_sim,The mover,mover,76,0.3942009508609772,thief,339,0.6057990789413452,Thethiefmover,False

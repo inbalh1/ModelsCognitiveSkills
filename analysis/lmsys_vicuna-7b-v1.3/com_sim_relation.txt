@@ -1,0 +1,2 @@
+Percentage of right in both out of right in com 0.7857142857142857
+len right second com: 28

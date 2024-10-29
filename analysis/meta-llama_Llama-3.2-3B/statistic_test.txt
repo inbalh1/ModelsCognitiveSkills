@@ -1,0 +1,20 @@
+first center right
+U-statistic: 1535.5
+P-value: 0.06969122594261984
+Fail to reject the null hypothesis: No significant difference.
+
+first center wrong
+U-statistic: 155.5
+P-value: 0.35878349650814534
+Fail to reject the null hypothesis: No significant difference.
+
+second center right
+U-statistic: 757.5
+P-value: 0.05374018095981193
+Fail to reject the null hypothesis: No significant difference.
+
+second center wrong
+U-statistic: 621.0
+P-value: 0.08723848940459189
+Fail to reject the null hypothesis: No significant difference.
+

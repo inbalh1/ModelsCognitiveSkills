@@ -3,11 +3,6 @@ U-statistic: 1106.0
 P-value: 3.7708706138261737e-10
 Reject the null hypothesis: non com has significantly larger values.
 
-first center right
-U-statistic: 1106.0
-P-value: 3.7708706138261737e-10
-Reject the null hypothesis: non com has significantly larger values.
-
 first center wrong
 Not enough data to perform test
 

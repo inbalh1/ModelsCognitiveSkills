@@ -1,30 +1,32 @@
+import os
 import argparse
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
-import os
-import matplotlib.pyplot as plt
+from tqdm import tqdm
 import seaborn as sns
-import numpy as np
+
+access_token = ""
 
 MODEL_NANE = "lmsys/vicuna-7b-v1.3"
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else "cpu")
 
-
 def generate_prompt(sentence, question):
     prompt = (
-    f"Sentence: The capital of France is one of the most visited cities in the world.\n"
-    f"Question: What is the capital of France?\n"
-    f"Answer: Paris\n\n"
-    f"Sentence: Water is composed of two hydrogen atoms and one oxygen atom.\n"
-    f"Question: What is the chemical symbol for water?\n"
-    f"Answer: H₂O\n\n"
-    f"Sentence: The Earth is divided into large landmasses known as continents.\n"
-    f"Question: How many continents are there on Earth?\n"
-    f"Answer: Seven\n"
-    f"Sentence: {sentence}\n"
-    f"Question: {question}\n"
-    f"Answer: The")
+        f"Sentence: The capital of France is one of the most visited cities in the world.\n"
+        f"Question: What is the capital of France?\n"
+        f"Answer: Paris\n\n"
+        f"Sentence: Water is composed of two hydrogen atoms and one oxygen atom.\n"
+        f"Question: What is the chemical symbol for water?\n"
+        f"Answer: H₂O\n\n"
+        f"Sentence: The Earth is divided into large landmasses known as continents.\n"
+        f"Question: How many continents are there on Earth?\n"
+        f"Answer: Seven\n"
+        f"Sentence: {sentence}\n"
+        f"Question: {question}\n"
+        f"Answer: The")
 
     return prompt
 
@@ -50,9 +52,11 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
     # here we are generting sequence in num_tokens length, to handle multiple tokens answers
     # in the accuracy calculation we will ceck only the first token of the answer
     for it in range(num_tokens):
-        if len(correct_token_ids) > it and len(incorrect_token_ids) > it and correct_token_ids[it] == incorrect_token_ids[it]:
+        if len(correct_token_ids) > it and len(incorrect_token_ids) > it and correct_token_ids[it] == \
+                incorrect_token_ids[it]:
             if correct_token_ids[it] != tokenizer.bos_token_id:
-                generated_ids = torch.cat((generated_ids, torch.tensor([[correct_token_ids[it]]], device=generated_ids.device)), dim=-1)
+                generated_ids = torch.cat(
+                    (generated_ids, torch.tensor([[correct_token_ids[it]]], device=generated_ids.device)), dim=-1)
                 answer_ids.append(correct_token_ids[it])
             continue
 
@@ -68,12 +72,13 @@ def predict_answer(model, tokenizer, sentence, correct_option, incorrect_option,
             is_first_diff_token = True
             correct_first_token = correct_token_ids[it]
             incorrect_first_token = incorrect_token_ids[it]
-            probabilities_token_ids = [correct_first_token,incorrect_first_token]
-            probabilities_logits = next_token_logits[:,probabilities_token_ids]
+            probabilities_token_ids = [correct_first_token, incorrect_first_token]
+            probabilities_logits = next_token_logits[:, probabilities_token_ids]
             # calculate probabilities over first different tokens
             probabilities = torch.softmax(probabilities_logits, dim=-1)
             probabilities_list = probabilities.squeeze().tolist()
-            token_probabilities = {token_id: prob for token_id, prob in zip(probabilities_token_ids, probabilities_list)}
+            token_probabilities = {token_id: prob for token_id, prob in
+                                   zip(probabilities_token_ids, probabilities_list)}
 
         # Find the argmax of the valid token logits
         predicted_token_id = valid_token_ids[torch.argmax(next_token_logits_valid)]
@@ -102,27 +107,12 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
 
         predicted_answer, token_probabilities, correct_token, incorrect_token = \
             predict_answer(model, tokenizer, sentence, correct_option, incorrect_option, question)
-        if should_print:
-            print(f"Sentence: {sentence}")
-            print(f"Correct Option: {correct_option}")
-            print(f"Incorrect Option: {incorrect_option}")
-            print(f"True Answer: {true_answer}")
-            print(f"Predicted Answer: {predicted_answer}")
 
         is_correct_prediction = predicted_answer.startswith(true_answer)
         if is_correct_prediction:
             correct_predictions += 1
-            if print:
-              print("Correct prediction!")
-        else:
-            if print:
-              print("Incorrect prediction.")
-
-        if print:
-          print("-" * 50)
 
         total_predictions += 1
-
 
         output.append({
             # Add all columns from original df, and some additional information
@@ -146,10 +136,9 @@ def predict_and_calculate_correct_predictions(model, tokenizer, data_df,
 
     return correct_predictions, total_predictions
 
+
 def calc_accuracy(correct_predictions, total_predictions, print=False):
     accuracy = correct_predictions / total_predictions * 100
-    if print:
-        print(f"Accuracy: {accuracy:.2f}%")
     return accuracy
 
 
@@ -158,7 +147,8 @@ def plot_acc(acc_dict, title, xlabels, res_dir):
     fig, ax = plt.subplots(figsize=(8, 6))
 
     # Create the barplot
-    bars = ax.bar(list(acc_dict.keys()), list(acc_dict.values()), color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'], edgecolor='black', alpha=0.85)
+    bars = ax.bar(list(acc_dict.keys()), list(acc_dict.values()), color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'],
+                  edgecolor='black', alpha=0.85)
 
     # Add the accuracy values on top of the bars
     for bar in bars:
@@ -190,7 +180,7 @@ def plot_acc(acc_dict, title, xlabels, res_dir):
 
     # Show the plot
     plt.show()
-  
+
 
 def plot_grouped_barplot(categories, group_values, group_labels, xlabel, title, res_dir):
     """
@@ -268,7 +258,7 @@ def plot_confidence(confidence, res_dir, title, color="blue"):
     plt.figure(figsize=(10, 6))
 
     # Plot histogram for first list
-    sns.histplot(confidence , bins=20, kde=False, color=color, alpha=0.5, label='right', stat="density")
+    sns.histplot(confidence, bins=20, kde=False, color=color, alpha=0.5, label='right', stat="density")
 
     # Add labels and title
     plt.title(title)
@@ -303,26 +293,30 @@ def plot_confidence_grid(df, res_dir):
         # For wrong answers
         wrong = df[(df["type"] == t) & (df["is_correct_prediction"] == False)]
         median_wrong = wrong["incorrect_probability"].median()  # Calculate median for wrong
-        sns.histplot(wrong["incorrect_probability"], bins=20, binwidth=0.025, kde=False, color='blue', alpha=0.5, label='incorrect', stat="percent", ax=axes[i*2])
-        axes[i*2].axvline(median_wrong, color='red', linestyle='--', linewidth=2)  # Add vertical line at median
-        axes[i*2].text(median_wrong, 90, f'{median_wrong:.2f}', color='red', fontsize=10, va='center', ha='right', backgroundcolor='white')  # Add median value text
-        axes[i*2].set_title(f'Confidence wrong {t}')
-        axes[i*2].set_xlabel('Probability')
-        axes[i*2].set_ylabel('Percent')
-        axes[i*2].set_xlim(0, 1)
-        axes[i*2].set_ylim(0, 100)
+        sns.histplot(wrong["incorrect_probability"], bins=20, binwidth=0.025, kde=False, color='blue', alpha=0.5,
+                     label='incorrect', stat="percent", ax=axes[i * 2])
+        axes[i * 2].axvline(median_wrong, color='red', linestyle='--', linewidth=2)  # Add vertical line at median
+        axes[i * 2].text(median_wrong, 90, f'{median_wrong:.2f}', color='red', fontsize=10, va='center', ha='right',
+                         backgroundcolor='white')  # Add median value text
+        axes[i * 2].set_title(f'Confidence wrong {t}')
+        axes[i * 2].set_xlabel('Probability')
+        axes[i * 2].set_ylabel('Percent')
+        axes[i * 2].set_xlim(0, 1)
+        axes[i * 2].set_ylim(0, 100)
 
         # For correct answers
         right = df[(df["type"] == t) & (df["is_correct_prediction"] == True)]
         median_right = right["correct_probability"].median()  # Calculate median for correct
-        sns.histplot(right["correct_probability"], bins=20, binwidth=0.025, kde=False, color='green', alpha=0.5, label='correct', stat="percent", ax=axes[i*2+1])
-        axes[i*2+1].axvline(median_right, color='red', linestyle='--', linewidth=2)  # Add vertical line at median
-        axes[i*2+1].text(median_right, 90, f'{median_right:.2f}', color='red', fontsize=10, va='center', ha='right', backgroundcolor='white')  # Add median value text
-        axes[i*2+1].set_title(f'Confidence right {t}')
-        axes[i*2+1].set_xlabel('Probability')
-        axes[i*2+1].set_ylabel('Percent')
-        axes[i*2+1].set_xlim(0, 1)
-        axes[i*2+1].set_ylim(0, 100)
+        sns.histplot(right["correct_probability"], bins=20, binwidth=0.025, kde=False, color='green', alpha=0.5,
+                     label='correct', stat="percent", ax=axes[i * 2 + 1])
+        axes[i * 2 + 1].axvline(median_right, color='red', linestyle='--', linewidth=2)  # Add vertical line at median
+        axes[i * 2 + 1].text(median_right, 90, f'{median_right:.2f}', color='red', fontsize=10, va='center', ha='right',
+                             backgroundcolor='white')  # Add median value text
+        axes[i * 2 + 1].set_title(f'Confidence right {t}')
+        axes[i * 2 + 1].set_xlabel('Probability')
+        axes[i * 2 + 1].set_ylabel('Percent')
+        axes[i * 2 + 1].set_xlim(0, 1)
+        axes[i * 2 + 1].set_ylim(0, 100)
 
     # Save the entire grid plot
     filename = 'confidence_grid.png'
@@ -333,36 +327,37 @@ def plot_confidence_grid(df, res_dir):
 
 def run(data_path, out_path):
     df = pd.read_csv(data_path)
-    correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df, output_path=out_path)
+    correct_predictions_all, total_predictions_all = predict_and_calculate_correct_predictions(model, tokenizer, df,
+                                                                                               output_path=out_path)
     # Run on only a part of the df
-    #df_first = df[df["type"] == "first_center_sim"]
-    #correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
-    #print(correct_predictions_first)
-    #print(total_predictions_first)
+    # df_first = df[df["type"] == "first_center_sim"]
+    # correct_predictions_first, total_predictions_first = predict_and_calculate_correct_predictions(model, tokenizer, df_first, output_path='first_center_output.csv')
+    # print(correct_predictions_first)
+    # print(total_predictions_first)
     return correct_predictions_all, total_predictions_all
 
 
 def draw_all_plots(data_path, out_path, res_dir):
     # Run the model to get predictions
     correct_predictions_all, total_predictions_all = run(data_path, out_path)
-    
+
     # Split according to wording and center types
     df = pd.read_csv(out_path)
-    
-    correct_preds_dict={}
-    total_preds_dict={}
+
+    correct_preds_dict = {}
+    total_preds_dict = {}
 
     for sen_type in df["type"].unique():
-        sen_type_df= df[df["type"] == sen_type]
-        correct_predictions= len(sen_type_df[sen_type_df["is_correct_prediction"]==1])
-        correct_preds_dict[sen_type]= correct_predictions
-        total_predictions= len(sen_type_df)
-        total_preds_dict[sen_type]= total_predictions
+        sen_type_df = df[df["type"] == sen_type]
+        correct_predictions = len(sen_type_df[sen_type_df["is_correct_prediction"] == 1])
+        correct_preds_dict[sen_type] = correct_predictions
+        total_predictions = len(sen_type_df)
+        total_preds_dict[sen_type] = total_predictions
 
     # Sanity check
     assert (sum(correct_preds_dict.values()) == correct_predictions_all)
     assert (sum(total_preds_dict.values()) == total_predictions_all)
-    
+
     # plots
     wordings = ["com", "mid", "sim", "sim_rev"]
     all_center_types = ["first_center", "second_center"]
@@ -379,7 +374,7 @@ def draw_all_plots(data_path, out_path, res_dir):
         wording_accuracy[wording] = calc_accuracy(correct_predictions, total_predictions)
 
     plot_acc(wording_accuracy, "Accuracy according to wording", "wordings", res_dir)
-    
+
     # Compare according to different types
     center_types_accuracy = {}
 
@@ -405,7 +400,8 @@ def draw_all_plots(data_path, out_path, res_dir):
             wording_acc.append(calc_accuracy(correct_predictions, total_predictions))
         acc_by_wording_center_type.append(wording_acc)
 
-    plot_grouped_barplot(wordings, acc_by_wording_center_type, all_center_types, "wordings", "Accuracy by wording and center type", res_dir)
+    plot_grouped_barplot(wordings, acc_by_wording_center_type, all_center_types, "wordings",
+                         "Accuracy by wording and center type", res_dir)
 
     # Draw a plot of accuracy by center type as category and wording as group
     acc_by_center_type_wording = []
@@ -418,11 +414,12 @@ def draw_all_plots(data_path, out_path, res_dir):
             center_type_acc.append(calc_accuracy(correct_predictions, total_predictions))
         acc_by_center_type_wording.append(center_type_acc)
 
-    plot_grouped_barplot(all_center_types, acc_by_center_type_wording, wordings, "center types", "Accuracy by center type and wording", res_dir)
+    plot_grouped_barplot(all_center_types, acc_by_center_type_wording, wordings, "center types",
+                         "Accuracy by center type and wording", res_dir)
 
     # Check model confidence for right answers
     right = df[(df["is_correct_prediction"] == True)]
-    plot_confidence(right["correct_probability"], res_dir, title='Model confidence for right answers')    
+    plot_confidence(right["correct_probability"], res_dir, title='Model confidence for right answers')
 
     # Check model confidence for wrong answers
     wrong = df[(df["is_correct_prediction"] == False)]
@@ -431,27 +428,75 @@ def draw_all_plots(data_path, out_path, res_dir):
     plot_confidence_grid(df, res_dir)
 
 
+def get_gpu_memory(max_gpus=None):
+    """Get available memory for each GPU."""
+    import torch
+
+    gpu_memory = []
+    num_gpus = (
+        torch.cuda.device_count()
+        if max_gpus is None
+        else min(max_gpus, torch.cuda.device_count())
+    )
+
+    for gpu_id in range(num_gpus):
+        with torch.cuda.device(gpu_id):
+            device = torch.cuda.current_device()
+            gpu_properties = torch.cuda.get_device_properties(device)
+            total_memory = gpu_properties.total_memory / (1024**3)
+            allocated_memory = torch.cuda.memory_allocated() / (1024**3)
+            available_memory = total_memory - allocated_memory
+            gpu_memory.append(available_memory)
+    return gpu_memory
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--model', type=str, help='The model name', required=False, nargs='?')
     parser.add_argument('-d', '--data_path', type=str, help='The model name', required=True, nargs='?')
+    parser.add_argument('-n', '--num_gpus', type=str, help="Num of gpus to load the model on", default="1")
+    parser.add_argument('-x', '--max_gpu_memory', type=float, default=None)
 
     args = parser.parse_args()
 
-    model_path = args.model or MODEL_NANE
+    models_path = args.model.split(',')
+    nums_gpus = [int(i) for i in args.num_gpus.split(',')]
 
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    if tokenizer.pad_token_id is None:
-        tokenizer.pad_token_id = tokenizer.eos_token_id
+    assert len(models_path) == len(nums_gpus), "Some models have their num of GPUs unspecified"
 
-    model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.float16)
-    model.to(DEVICE)
+    for i in range(len(models_path)):
+        model_path = models_path[i]
+        print(model_path)
+        num_gpus = nums_gpus[i]
+
+        tokenizer = AutoTokenizer.from_pretrained(model_path, token=access_token)
+        if tokenizer.pad_token_id is None:
+            tokenizer.pad_token_id = tokenizer.eos_token_id
+
+        model_kwargs = {'torch_dtype': torch.float16}
+        if num_gpus != 1:
+            model_kwargs['device_map'] = 'sequential'
+            available_gpu_memory = get_gpu_memory(num_gpus)
+            model_kwargs["max_memory"] = {i: str(int(available_gpu_memory[i] * 0.85)) + "GiB" for i in range(num_gpus)}
+        model = AutoModelForCausalLM.from_pretrained(model_path, token=access_token, **model_kwargs)
+        if num_gpus == 1:
+            model.to(DEVICE)
 
     # Create the directory for results if it doesn't exist
-    res_dir = model_path.replace("/", "_")
-    if not os.path.exists(res_dir):
-        os.makedirs(res_dir)
-        
-    # Path for saving model predictions
-    out_path = os.path.join(res_dir, "examples_with_predictions.csv")
-    draw_all_plots(data_path=args.data_path, out_path=out_path, res_dir=res_dir)
+        res_dir = os.path.join('results', model_path.replace("/", "_"))
+        if not os.path.exists(res_dir):
+            os.makedirs(res_dir)
+
+    # data_df = pd.read_csv(args.data_path)
+        out_path = os.path.join(res_dir, "output.csv")
+        try:
+            draw_all_plots(args.data_path, out_path, res_dir)
+        except Exception as e:
+            print(e)
+            print(f"Failed for model {model_path}")
+
+
+
+    
+
+

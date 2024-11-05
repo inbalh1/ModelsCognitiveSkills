@@ -1,0 +1,618 @@
+Model name is: gemma-2-2b
+right all
+U-statistic: 3018.0
+P-value: 0.034661234212514366
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 1220.0
+P-value: 0.04357977535870708
+Reject the null hypothesis: non com has significantly lower values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1290.0
+P-value: 0.00431613638406226
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 23.0
+P-value: 0.36663336663336665
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 231.0
+P-value: 0.34849824725398354
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 842.0
+P-value: 0.10721490204188777
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: gemma-2-2b-it
+right all
+U-statistic: 2622.5
+P-value: 0.00031187278980744306
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 752.0
+P-value: 0.03596207757096553
+Reject the null hypothesis: non com has significantly lower values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1145.0
+P-value: 0.0006976878289427705
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 22.0
+P-value: 0.024242424242424242
+Reject the null hypothesis: non com has significantly lower values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 116.0
+P-value: 0.00099754447249365
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 535.0
+P-value: 0.07339830013969961
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: gemma-2-9b
+right all
+U-statistic: 4119.0
+P-value: 0.04513537743798786
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 344.0
+P-value: 0.7159136315623964
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1663.5
+P-value: 0.3684967850599983
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 16.0
+P-value: 0.36363636363636365
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 415.5
+P-value: 0.0009563680503252533
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 217.0
+P-value: 0.7303788253311803
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: gemma-2-9b-it
+right all
+U-statistic: 2016.0
+P-value: 5.9739986611002874e-12
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 158.0
+P-value: 0.9951638657020121
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 730.0
+P-value: 2.3529700061562946e-09
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+Not enough data to perform test
+
+second center right
+U-statistic: 141.0
+P-value: 6.043283032283238e-07
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 143.0
+P-value: 0.9910708941849762
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.1-70B-Instruct
+right all
+U-statistic: 3921.5
+P-value: 1.157792773585708e-05
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 212.5
+P-value: 0.5652389702859059
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1115.0
+P-value: 0.006136893100519171
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 45.0
+P-value: 0.2980769230769231
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 853.5
+P-value: 0.00027158737573586717
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 61.0
+P-value: 0.7466397425610708
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.1-8B
+right all
+U-statistic: 3019.0
+P-value: 0.07757607894520824
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 988.5
+P-value: 0.26754405473130116
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 957.5
+P-value: 0.2430489704589749
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 187.5
+P-value: 0.19499928781912323
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 514.0
+P-value: 0.03048148876978172
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 312.5
+P-value: 0.488352555994893
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.1-8B-Instruct
+right all
+U-statistic: 2596.0
+P-value: 1.7371488196820087e-06
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 420.0
+P-value: 0.6185334851798892
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 710.0
+P-value: 0.0072032782672596255
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 129.0
+P-value: 0.22596512847447786
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 571.0
+P-value: 1.699302923227155e-05
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 85.0
+P-value: 0.840172347894713
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.1-Nemotron-70B-Instruct-HF
+right all
+U-statistic: 4086.5
+P-value: 1.773454529705977e-05
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 157.5
+P-value: 0.8022673380351126
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1131.5
+P-value: 0.005196277992564777
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 25.0
+P-value: 0.6286630036630035
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 900.0
+P-value: 0.00038464821609214653
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 51.5
+P-value: 0.8221637972770633
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.2-1B
+right all
+U-statistic: 3020.5
+P-value: 0.3301800643977184
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 1408.5
+P-value: 0.5160263235647555
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 894.5
+P-value: 0.6888977050149047
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 268.0
+P-value: 0.8483611220740496
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 593.5
+P-value: 0.08017071774836892
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 439.0
+P-value: 0.19023971831084824
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.2-1B-Instruct
+right all
+U-statistic: 3272.0
+P-value: 0.3041880928131977
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 1130.0
+P-value: 0.7522955581830086
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 594.0
+P-value: 0.052018473889922645
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 368.5
+P-value: 0.33988533172289226
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 1069.0
+P-value: 0.8471576207385287
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 181.0
+P-value: 0.962484222120091
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.2-3B
+right all
+U-statistic: 3053.0
+P-value: 0.06282587174902927
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 1096.0
+P-value: 0.10055524052695447
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1014.5
+P-value: 0.12437632816636024
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 129.5
+P-value: 0.47741020845844934
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 512.0
+P-value: 0.098388625439227
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 471.0
+P-value: 0.059694108906465336
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Llama-3.2-3B-Instruct
+right all
+U-statistic: 2627.5
+P-value: 0.00028011478307924157
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 789.5
+P-value: 0.6116306434203488
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 869.5
+P-value: 0.04032429977684951
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 160.5
+P-value: 0.40863774328813857
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 449.0
+P-value: 0.0005036486398950689
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 243.5
+P-value: 0.6778991699501541
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: Mistral-7B-Instruct-v0.3
+right all
+U-statistic: 3460.0
+P-value: 6.364636926812411e-05
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 115.5
+P-value: 0.9897725318210655
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 1189.5
+P-value: 3.966291349509974e-05
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 3.0
+P-value: 0.25
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 162.0
+P-value: 2.8278493541069463e-06
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 78.5
+P-value: 0.9968144719803542
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: vicuna-13b-v1.5
+right all
+U-statistic: 2999.5
+P-value: 9.797913158353755e-06
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 217.0
+P-value: 0.9979906548268355
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 905.0
+P-value: 2.4149611562162994e-07
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+Not enough data to perform test
+
+second center right
+U-statistic: 265.5
+P-value: 0.00039846859825557536
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 208.0
+P-value: 0.9920238367741598
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: vicuna-7b-v1.3
+right all
+U-statistic: 3821.0
+P-value: 0.00017154847816707372
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 418.5
+P-value: 0.23364013698647096
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 951.0
+P-value: 2.638882605341798e-06
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 12.0
+P-value: 0.03571428571428571
+Reject the null hypothesis: non com has significantly lower values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 727.0
+P-value: 0.05211944201051912
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 283.5
+P-value: 0.3562302053380346
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
+Model name is: vicuna-7b-v1.5
+right all
+U-statistic: 2664.5
+P-value: 6.557221867721624e-05
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wrong all
+U-statistic: 757.0
+P-value: 0.3520681773278195
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center right
+U-statistic: 773.0
+P-value: 3.176073890532359e-07
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+first center wrong
+U-statistic: 36.0
+P-value: 0.009324009324009324
+Reject the null hypothesis: non com has significantly lower values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center right
+U-statistic: 341.5
+P-value: 0.04900152492312524
+Reject the null hypothesis: non com has significantly larger values.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+second center wrong
+U-statistic: 482.0
+P-value: 0.5790095765792307
+Fail to reject the null hypothesis: No significant difference.
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+________________________________________________________________________
+
